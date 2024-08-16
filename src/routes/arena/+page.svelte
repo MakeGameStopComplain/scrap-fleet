@@ -31,7 +31,7 @@
 </script>
 
 <div bind:this={world}>
-    <Ship xPos={playerPos.x} yPos={playerPos.y} />
+    <Ship xPos={playerPos.x} yPos={playerPos.y} angle={50} />
 </div>
 
 <style>

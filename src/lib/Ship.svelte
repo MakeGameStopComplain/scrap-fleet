@@ -24,12 +24,15 @@
 
     export let xPos = 200;
     export let yPos = 200;
+    export let angle = 0;
 </script>
 
 <div style:position="absolute"
     style:top="{yPos}px"
     style:left="{xPos}px"
-    style:transform="translate(-50%, -50%)">
+    style:width="{cellSize * body[0].length}px"
+    style:height="{cellSize * body.length}px"
+    style:transform="translate(-50%, -50%) rotate({angle}deg)">
     {#each body as row, r}
         {#each row as cell, c}
             {@const fill = fillMap[cell]}
