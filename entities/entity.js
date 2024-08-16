@@ -1,5 +1,5 @@
 class Entity {
-    constructor(handler, scene, entityName) { 
+    constructor(handler, scene, spriteName, entityName) { 
         // Setup settings
         this.scene = scene;
         this.entityName = entityName; // No spaces in entity name
