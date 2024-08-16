@@ -5,9 +5,18 @@ class MainMenu extends Scene {
         super("main-menu");
     }
 
-    preload() {}
+    preload() {
+        this.load.image("playButton", "/images/playButton.png");
+    }
 
-    create() {}
+    create() {
+        this.playButton = this.add.image(480, 270, "playButton");
+        this.playButton.setScale(0.5);
+        this.playButton.setInteractive();
+        this.playButton.on("pointerdown", () => {
+            this.scene.start("scene-1");
+        });
+    }
 
     update() {}
 
