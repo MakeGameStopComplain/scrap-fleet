@@ -69,6 +69,7 @@
         }
         return count;
     }
+    let fireFrame = 1;
     export function tick() {
         if (thrusting == 1) {
             velocity += 0.5 * getThrusterCount();
@@ -84,6 +85,9 @@
 
         yPos -= Math.cos(angle * Math.PI / 180) * velocity;
         xPos += Math.sin(angle * Math.PI / 180) * velocity;
+
+        if (fireFrame == 1) fireFrame = 2;
+        else fireFrame = 1;
     }
     function getGunPositions() {
         let positions = [];
@@ -143,7 +147,7 @@
                     style:left="{c * cellSize}px"
                     style:width="{cellSize}px"
                     style:height="{cellSize}px"
-                    style:background="url('{thrusterFire1}')"
+                    style:animation="thrusterFire 0.1s infinite"
                     style:background-size="contain"
                     style:transform="rotate(90deg)"
                     style:mix-blend-mode="screen"
@@ -155,4 +159,12 @@
 </div>
 
 <style>
+    @keyframes -global-thrusterFire {
+        0%, 100% {
+            background-image: url($lib/ship_assets/thruster_fire_frame1.png);
+        }
+        50% {
+            background-image: url($lib/ship_assets/thruster_fire_frame2.png);
+        }
+    }
 </style>
