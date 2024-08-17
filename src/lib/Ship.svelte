@@ -59,12 +59,21 @@
     export function rotate(deg=5) {
         angle += deg;
     }
+    function getThrusterCount() {
+        let count = 0;
+        for (let row of body) {
+            for (let cell of row) {
+                if (cell.toUpperCase() == "T") count++;
+            }
+        }
+        return count;
+    }
     export function tick() {
         if (thrusting == 1) {
-            velocity += 0.5;
+            velocity += 0.5 * getThrusterCount();
         }
         else if (thrusting == -1) {
-            velocity -= 0.5;
+            velocity -= 0.5 * getThrusterCount();
         }
         else if (thrusting == 0) {
             velocity /= 1.05;
