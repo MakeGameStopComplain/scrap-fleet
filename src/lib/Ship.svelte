@@ -71,17 +71,18 @@
     }
     let fireFrame = 1;
     export function tick() {
+        let thrusterCount = getThrusterCount();
         if (thrusting == 1) {
-            velocity += 0.5 * getThrusterCount();
+            velocity += 0.5 * thrusterCount;
         }
         else if (thrusting == -1) {
-            velocity -= 0.5 * getThrusterCount();
+            velocity -= 0.5 * thrusterCount;
         }
         else if (thrusting == 0) {
             velocity /= 1.05;
         }
 
-        velocity = Math.max(Math.min(velocity, 12), -12);
+        velocity = Math.max(Math.min(velocity, 7 * thrusterCount), -7 * thrusterCount);
 
         yPos -= Math.cos(angle * Math.PI / 180) * velocity;
         xPos += Math.sin(angle * Math.PI / 180) * velocity;
