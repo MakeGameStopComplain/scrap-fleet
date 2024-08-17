@@ -26,7 +26,7 @@
         [".",".",".",".",".",".","."],
     ];
 
-    let cellSize = 24;
+    let cellSize = 36;
 
     let fillMap = {
         ".": "transparent",
