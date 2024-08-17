@@ -7,14 +7,28 @@
     let inputs = {};
 
     let playerPos = {
-        x: 200, y: 200,
+        x: 200, y: 200, angle: 0,
     };
+    let playerVelocity = 0;
+    let accelerating = false;
 
     function tick() {
-        if (inputs["ArrowUp"]) playerPos.y -= 10;
-        else if (inputs["ArrowDown"]) playerPos.y += 10;
-        if (inputs["ArrowRight"]) playerPos.x += 10;
-        else if (inputs["ArrowLeft"]) playerPos.x -= 10;
+        if (inputs["ArrowUp"]) {
+            playerVelocity += 0.5;
+            accelerating = true;
+        }
+        else if (inputs["ArrowDown"]) {
+            playerVelocity -= 0.5;
+            accelerating = true;
+        }
+        else accelerating = false;
+        if (inputs["ArrowRight"]) playerPos.angle += 5;
+        else if (inputs["ArrowLeft"]) playerPos.angle -= 5;
+        playerVelocity = Math.max(Math.min(playerVelocity, 12), -12);
+        if (!accelerating) playerVelocity /= 1.05;
+
+        playerPos.y -= Math.cos(playerPos.angle * Math.PI / 180) * playerVelocity;
+        playerPos.x += Math.sin(playerPos.angle * Math.PI / 180) * playerVelocity;
 
         setCamera(playerPos.x, playerPos.y);
 
@@ -75,12 +89,12 @@
 
 <div bind:this={world} id="world" style:top="{cameraTop}px" style:left="{cameraLeft}px"
     style:width="{arenaWidth}px" style:height="{arenaHeight}px">
-    <Ship xPos={playerPos.x} yPos={playerPos.y} angle={50} body={playerShipBody} />
+    <Ship xPos={playerPos.x} yPos={playerPos.y} angle={playerPos.angle} body={playerShipBody} />
 </div>
 
 <style>
     :global(body) {
-        margin: none;
+        margin: 0;
     }
 
     #world {
