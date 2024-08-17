@@ -4,14 +4,22 @@
 
 <script>
     import { onMount } from "svelte";
+    import blockSprite from "$lib/ship_assets/block.png";
+    import cockpitSprite from "$lib/ship_assets/cockpit.png";
+    import gunSprite from "$lib/ship_assets/laser_gun.png";
+    import reactorSprite from "$lib/ship_assets/reactor.png";
+    import thrusterSprite from "$lib/ship_assets/thruster.png";
+    import damagedBlockSprite from "$lib/ship_assets/damaged_block.png";
+    import damagedCockpitSprite from "$lib/ship_assets/damaged_cockpit.png";
+    import damagedReactorSprite from "$lib/ship_assets/damaged_reactor.png";
 
     export let body = [
         [".",".",".",".",".",".","."],
-        [".",".","#","#","#",".","."],
-        [".",".",".","#",".",".","."],
-        [".",".","#","#","#",".","."],
-        [".",".",".","#",".",".","."],
-        [".",".","#","#","#",".","."],
+        [".",".","B","B","B",".","."],
+        [".",".",".","B",".",".","."],
+        [".",".","B","C","B",".","."],
+        [".",".",".","B",".",".","."],
+        [".",".","B","B","B",".","."],
         [".",".",".",".",".",".","."],
     ];
 
@@ -19,7 +27,11 @@
 
     let fillMap = {
         ".": "transparent",
-        "#": "red",
+        "B": `url("${blockSprite}")`,
+        "C": `url("${cockpitSprite}")`,
+        "G": `url("${gunSprite}")`,
+        "R": `url("${reactorSprite}")`,
+        "T": `url("${thrusterSprite}")`,
     };
 
     export let xPos = 200;
@@ -56,6 +68,7 @@
                 style:width="{cellSize}px"
                 style:height="{cellSize}px"
                 style:background={fill}
+                style:background-size="contain"
             ></div>
         {/each}
     {/each}
