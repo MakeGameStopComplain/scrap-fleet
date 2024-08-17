@@ -85,10 +85,40 @@
     {#each shipArr as row, r}
         <tr>
             {#each row as cell, c}
+                {@const canPlaceTile = (() => {
+                    if (selectedTile == "G") {
+                        if (r < 6 && ["B", "C", "R"].includes(shipArr[r + 1][c])) {
+                            return true;
+                        }
+                    }
+                    else if (selectedTile == "T") {
+                        if (r > 0 && ["B", "C", "R"].includes(shipArr[r - 1][c])) {
+                            return true;
+                        }
+                    }
+                    else {
+                        if (r > 0 && shipArr[r - 1][c] != ".") {
+                            return true;
+                        }
+                        if (c > 0 && shipArr[r][c - 1] != ".") {
+                            return true;
+                        }
+                        if (c < 6 && shipArr[r][c + 1] != ".") {
+                            return true;
+                        }
+                        if (r < 6 && shipArr[r + 1][c] != ".") {
+                            return true;
+                        }
+                    }
+                    return false;
+                })()}
                 <td style:background-image={fillMap[cell]}
+                    style:background-color={canPlaceTile ? "#FF000055" : "#00000000"}
                     on:click={() => {
-                        shipArr[r][c] = selectedTile;
-                        inventory[selectedTile]--;
+                        if (canPlaceTile) {
+                            shipArr[r][c] = selectedTile;
+                            inventory[selectedTile]--;
+                        }
                     }}
                     on:contextmenu={(e) => {
                         e.preventDefault();
