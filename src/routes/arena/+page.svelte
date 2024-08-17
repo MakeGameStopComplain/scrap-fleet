@@ -47,7 +47,11 @@
             i++;
         }
         playerBullets = playerBullets;
-
+        
+        if (playerPos.x < 0) playerPos.x = 0;
+        if (playerPos.y < 0) playerPos.y = 0;
+        if (playerPos.x > arenaWidth) playerPos.x = arenaWidth;
+        if (playerPos.y > arenaHeight) playerPos.y = arenaHeight;
 
         requestAnimationFrame(tick);
     }

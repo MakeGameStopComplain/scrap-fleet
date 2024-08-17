@@ -122,6 +122,7 @@
                     style:background="url('{thrusterFire1}')"
                     style:background-size="contain"
                     style:transform="rotate(90deg)"
+                    style:mix-blend-mode="screen"
                 ></div>
             {/if}
         {/each}
