@@ -29,12 +29,8 @@
         setCamera(playerPos.x, playerPos.y);
 
         if (inputs["x"]) {
-            playerBullets.push({
-                x: playerPos.x,
-                y: playerPos.y,
-                angle: playerPos.angle,
-            });
-            playerBullets = playerBullets;
+            let newBullets = playerShipComponent.createBullet();
+            playerBullets = [...playerBullets, ...newBullets];
             inputs["x"] = false;
         }
 

@@ -84,6 +84,15 @@
         yPos -= Math.cos(angle * Math.PI / 180) * velocity;
         xPos += Math.sin(angle * Math.PI / 180) * velocity;
     }
+    export function createBullet() {
+        let newBullets = [];
+        newBullets.push({
+            x: xPos,
+            y: yPos,
+            angle: angle,
+        });
+        return newBullets;
+    }
 </script>
 
 <div style:position="absolute"
