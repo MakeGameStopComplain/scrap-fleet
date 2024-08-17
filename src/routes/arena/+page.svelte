@@ -3,6 +3,7 @@
     import Ship from "$lib/Ship.svelte";
     import Bullet from "$lib/Bullet.svelte";
     import { goto } from "$app/navigation";
+    import backdrop1 from "$lib/backgrounds/background1.png";
     
     let world;
 
@@ -104,7 +105,9 @@
 </script>
 
 <div bind:this={world} id="world" style:top="{cameraTop}px" style:left="{cameraLeft}px"
-    style:width="{arenaWidth}px" style:height="{arenaHeight}px">
+    style:width="{arenaWidth}px" style:height="{arenaHeight}px"
+    style:background-image="url('{backdrop1}')" style:background-size="cover"
+    style:background-position="center">
     <Ship bind:xPos={playerPos.x} bind:yPos={playerPos.y} body={playerShipBody} bind:this={playerShipComponent} />
     {#each playerBullets as bull}
         <Bullet xPos={bull.x} yPos={bull.y} angle={bull.angle} />
