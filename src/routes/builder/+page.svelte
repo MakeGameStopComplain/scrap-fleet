@@ -86,6 +86,7 @@
         <tr>
             {#each row as cell, c}
                 {@const canPlaceTile = (() => {
+                    if (inventory[selectedTile] <= 0) return false;
                     if (selectedTile == "G") {
                         if (r < 6 && ["B", "C", "R"].includes(shipArr[r + 1][c])) {
                             return true;
