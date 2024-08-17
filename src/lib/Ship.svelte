@@ -30,7 +30,7 @@
 <div style:position="absolute"
     style:top="{yPos}px"
     style:left="{xPos}px"
-    style:width="{cellSize * body[0].length}px"
+    style:width="{cellSize * (body[0] || []).length}px"
     style:height="{cellSize * body.length}px"
     style:transform="translate(-50%, -50%) rotate({angle}deg)">
     {#each body as row, r}
