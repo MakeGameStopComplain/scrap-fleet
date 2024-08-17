@@ -8,7 +8,7 @@
     import thrusterSprite from "$lib/ship_assets/thruster.png";
 
     let fillMap = {
-        ".": "transparent",
+        ".": "",
         "B": `url("${blockSprite}")`,
         "C": `url("${cockpitSprite}")`,
         "G": `url("${gunSprite}")`,
@@ -54,14 +54,45 @@
         }
         getShipArr();
     });
+
+    let inventory = {
+        "B": 5,
+        "C": 1,
+        "G": 2,
+        "R": 2,
+        "T": 2,
+    }
+    let selectedTile = "B";
 </script>
+
+<table>
+    <tr>
+        {#each Object.keys(inventory) as key}
+            {@const count = inventory[key]}
+            <td style:background-image={fillMap[key]} style:transform="rotate(0)"
+                style:outline={selectedTile == key ? "3px solid red" : ""}
+                on:click={() => { selectedTile = key; }}>
+                <span style:color="white" style:background-color="black">
+                    x{count}
+                </span>
+            </td>
+        {/each}
+    </tr>
+</table>
+<br />
 
 <table>
     {#each shipArr as row, r}
         <tr>
             {#each row as cell, c}
-                <td style:background-image={fillMap[cell]}>
-                    <input type="text" bind:value={shipArr[r][c]} style:width="50px" />
+                <td style:background-image={fillMap[cell]}
+                    on:click={() => {
+                        shipArr[r][c] = selectedTile;
+                    }}
+                    on:contextmenu={(e) => {
+                        e.preventDefault();
+                        shipArr[r][c] = ".";
+                    }}>
                 </td>
             {/each}
         </tr>
@@ -77,11 +108,12 @@
     }
 
     table td {
-        width: 100px;
-        height: 100px;
+        width: 60px;
+        height: 60px;
         border: 1px solid red;
         transform: rotate(90deg);
         background-size: contain;
+        user-select: none;
     }
 
     table {
