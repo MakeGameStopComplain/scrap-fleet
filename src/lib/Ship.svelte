@@ -12,6 +12,8 @@
     import damagedBlockSprite from "$lib/ship_assets/damaged_block.png";
     import damagedCockpitSprite from "$lib/ship_assets/damaged_cockpit.png";
     import damagedReactorSprite from "$lib/ship_assets/damaged_reactor.png";
+    import thrusterFire1 from "$lib/ship_assets/thruster_fire_frame1.png";
+    import thrusterFire2 from "$lib/ship_assets/thruster_fire_frame2.png";
 
     export let body = [
         [".",".",".",".",".",".","."],
@@ -90,6 +92,17 @@
                 style:background-size="contain"
                 style:transform="rotate(90deg)"
             ></div>
+            {#if cell.toUpperCase() == "T"}
+                <div style:position="absolute"
+                    style:top="{r * cellSize + cellSize}px"
+                    style:left="{c * cellSize}px"
+                    style:width="{cellSize}px"
+                    style:height="{cellSize}px"
+                    style:background="url('{thrusterFire1}')"
+                    style:background-size="contain"
+                    style:transform="rotate(90deg)"
+                ></div>
+            {/if}
         {/each}
     {/each}
 
