@@ -4,6 +4,7 @@
     import Bullet from "$lib/Bullet.svelte";
     import { goto } from "$app/navigation";
     import backdrop1 from "$lib/backgrounds/background1.png";
+    import themeSong from "$lib/audio/spaceship_main_theme.wav";
     
     let world;
 
@@ -124,6 +125,10 @@
     on:click={() => {
         goto("/");
     }}>Menu</button>
+
+<audio autoplay loop>
+    <source src={themeSong} type="audio/wav" />
+</audio>
 
 <style>
     :global(body) {
