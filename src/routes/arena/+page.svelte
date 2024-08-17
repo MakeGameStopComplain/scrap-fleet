@@ -16,6 +16,8 @@
         if (inputs["ArrowRight"]) playerPos.x += 10;
         else if (inputs["ArrowLeft"]) playerPos.x -= 10;
 
+        setCamera(playerPos.x, playerPos.y);
+
         requestAnimationFrame(tick);
     }
 
@@ -53,14 +55,32 @@
         });
         tick();
     });
+
+    let cameraLeft = 0, cameraTop = 0;
+    function setCamera(x, y) {
+        let midScreen = {
+            x: window.innerWidth / 2,
+            y: window.innerHeight / 2,
+        };
+        cameraTop = midScreen.y - y;
+        cameraLeft = midScreen.x - x;
+        if (cameraTop + 2000 < window.innerHeight) cameraTop = window.innerHeight - 2000;
+        if (cameraLeft + 2000 < window.innerWidth) cameraLeft = window.innerWidth - 2000;
+    }
 </script>
 
-<div bind:this={world}>
+<div bind:this={world} id="world" style:top="{cameraTop}px" style:left="{cameraLeft}px">
     <Ship xPos={playerPos.x} yPos={playerPos.y} angle={50} body={playerShipBody} />
 </div>
 
 <style>
     :global(body) {
         margin: none;
+    }
+
+    #world {
+        position: fixed;
+        width: 2000px;
+        height: 2000px;
     }
 </style>
