@@ -1,6 +1,7 @@
 <script>
     import { onMount } from "svelte";
     import Ship from "$lib/Ship.svelte";
+    import { goto } from "$app/navigation";
     
     let world;
 
@@ -91,6 +92,13 @@
     style:width="{arenaWidth}px" style:height="{arenaHeight}px">
     <Ship xPos={playerPos.x} yPos={playerPos.y} angle={playerPos.angle} body={playerShipBody} />
 </div>
+
+<button style:position="fixed"
+    style:top="10px"
+    style:right="10px"
+    on:click={() => {
+        goto("/");
+    }}>Menu</button>
 
 <style>
     :global(body) {
