@@ -88,12 +88,15 @@
         let positions = [];
         let r = 0, c = 0;
         for (let row of body) {
+            c = 0;
             for (let cell of row) {
                 if (cell.toUpperCase() == "G") {
                     let radialAngle = Math.atan2(r - body.length / 2, c - body[0].length / 2);
+                    console.log(r - body.length / 2, c - body[0].length / 2)
+                    console.log(radialAngle)
                     positions.push({
-                        x: xPos + Math.cos(radialAngle + angle * Math.PI / 180) * cellSize,
-                        y: yPos + Math.sin(radialAngle + angle * Math.PI / 180) * cellSize,
+                        x: xPos + Math.cos(radialAngle + angle * Math.PI / 180) * cellSize * 2,
+                        y: yPos + Math.sin(radialAngle + angle * Math.PI / 180) * cellSize * 2,
                     });
                 }
                 c++;
