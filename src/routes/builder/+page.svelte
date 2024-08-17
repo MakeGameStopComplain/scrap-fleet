@@ -57,7 +57,7 @@
 
     let inventory = {
         "B": 5,
-        "C": 1,
+        "C": 0,
         "G": 2,
         "R": 2,
         "T": 2,
@@ -87,6 +87,7 @@
             {#each row as cell, c}
                 {@const canPlaceTile = (() => {
                     if (inventory[selectedTile] <= 0) return false;
+                    if (r == 3 && c == 3) return false;
                     if (selectedTile == "G") {
                         if (r < 6 && ["B", "C", "R"].includes(shipArr[r + 1][c])) {
                             return true;
@@ -123,8 +124,10 @@
                     }}
                     on:contextmenu={(e) => {
                         e.preventDefault();
-                        if (shipArr[r][c] != ".") inventory[shipArr[r][c]]++;
-                        shipArr[r][c] = ".";
+                        if ((r != 3 || c != 3) && shipArr[r][c] != ".") {
+                            inventory[shipArr[r][c]]++;
+                            shipArr[r][c] = ".";
+                        }
                     }}>
                 </td>
             {/each}
