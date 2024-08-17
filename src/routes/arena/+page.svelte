@@ -56,6 +56,8 @@
         tick();
     });
 
+    let arenaWidth = 2000, arenaHeight = 2000;
+
     let cameraLeft = 0, cameraTop = 0;
     function setCamera(x, y) {
         let midScreen = {
@@ -64,12 +66,15 @@
         };
         cameraTop = midScreen.y - y;
         cameraLeft = midScreen.x - x;
-        if (cameraTop + 2000 < window.innerHeight) cameraTop = window.innerHeight - 2000;
-        if (cameraLeft + 2000 < window.innerWidth) cameraLeft = window.innerWidth - 2000;
+        cameraTop = Math.min(cameraTop, 0);
+        cameraLeft = Math.min(cameraLeft, 0);
+        if (cameraTop + arenaHeight < window.innerHeight) cameraTop = window.innerHeight - arenaHeight;
+        if (cameraLeft + arenaWidth < window.innerWidth) cameraLeft = window.innerWidth - arenaWidth;
     }
 </script>
 
-<div bind:this={world} id="world" style:top="{cameraTop}px" style:left="{cameraLeft}px">
+<div bind:this={world} id="world" style:top="{cameraTop}px" style:left="{cameraLeft}px"
+    style:width="{arenaWidth}px" style:height="{arenaHeight}px">
     <Ship xPos={playerPos.x} yPos={playerPos.y} angle={50} body={playerShipBody} />
 </div>
 
@@ -80,7 +85,5 @@
 
     #world {
         position: fixed;
-        width: 2000px;
-        height: 2000px;
     }
 </style>
