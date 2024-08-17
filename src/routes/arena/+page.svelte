@@ -17,6 +17,8 @@
     let playerBullets = [];
     let bulletSpeed = 24;
 
+    let playerShipComponent;
+
     function tick() {
         if (inputs["ArrowUp"]) {
             playerVelocity += 0.5;
@@ -118,7 +120,7 @@
 
 <div bind:this={world} id="world" style:top="{cameraTop}px" style:left="{cameraLeft}px"
     style:width="{arenaWidth}px" style:height="{arenaHeight}px">
-    <Ship xPos={playerPos.x} yPos={playerPos.y} angle={playerPos.angle} body={playerShipBody} />
+    <Ship xPos={playerPos.x} yPos={playerPos.y} angle={playerPos.angle} body={playerShipBody} bind:this={playerShipComponent} />
     {#each playerBullets as bull}
         <Bullet xPos={bull.x} yPos={bull.y} angle={bull.angle} />
     {/each}
