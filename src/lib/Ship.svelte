@@ -51,6 +51,25 @@
         }
         return false;
     };
+    export let velocity = 0;
+    export let accelerating = false;
+    export function thrust(forward=true) {
+        if (forward) velocity += 0.5;
+        else velocity -= 0.5;
+        accelerating = true;
+    }
+    export function rotate(deg=5) {
+        angle += deg;
+    }
+    export function tick() {
+        velocity = Math.max(Math.min(velocity, 12), -12);
+        if (!accelerating) velocity /= 1.05;
+
+        yPos -= Math.cos(angle * Math.PI / 180) * velocity;
+        xPos += Math.sin(angle * Math.PI / 180) * velocity;
+
+        accelerating = false;
+    }
 </script>
 
 <div style:position="absolute"

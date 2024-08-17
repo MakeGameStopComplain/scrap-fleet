@@ -11,8 +11,6 @@
     let playerPos = {
         x: 200, y: 200, angle: 0,
     };
-    let playerVelocity = 0;
-    let accelerating = false;
 
     let playerBullets = [];
     let bulletSpeed = 24;
@@ -20,22 +18,11 @@
     let playerShipComponent;
 
     function tick() {
-        if (inputs["ArrowUp"]) {
-            playerVelocity += 0.5;
-            accelerating = true;
-        }
-        else if (inputs["ArrowDown"]) {
-            playerVelocity -= 0.5;
-            accelerating = true;
-        }
-        else accelerating = false;
-        if (inputs["ArrowRight"]) playerPos.angle += 5;
-        else if (inputs["ArrowLeft"]) playerPos.angle -= 5;
-        playerVelocity = Math.max(Math.min(playerVelocity, 12), -12);
-        if (!accelerating) playerVelocity /= 1.05;
-
-        playerPos.y -= Math.cos(playerPos.angle * Math.PI / 180) * playerVelocity;
-        playerPos.x += Math.sin(playerPos.angle * Math.PI / 180) * playerVelocity;
+        if (inputs["ArrowUp"]) playerShipComponent.thrust(true);
+        else if (inputs["ArrowDown"]) playerShipComponent.thrust(false);
+        if (inputs["ArrowRight"]) playerShipComponent.rotate(5);
+        else if (inputs["ArrowLeft"]) playerShipComponent.rotate(-5);
+        playerShipComponent.tick();
 
         setCamera(playerPos.x, playerPos.y);
 
@@ -120,7 +107,7 @@
 
 <div bind:this={world} id="world" style:top="{cameraTop}px" style:left="{cameraLeft}px"
     style:width="{arenaWidth}px" style:height="{arenaHeight}px">
-    <Ship xPos={playerPos.x} yPos={playerPos.y} angle={playerPos.angle} body={playerShipBody} bind:this={playerShipComponent} />
+    <Ship bind:xPos={playerPos.x} bind:yPos={playerPos.y} body={playerShipBody} bind:this={playerShipComponent} />
     {#each playerBullets as bull}
         <Bullet xPos={bull.x} yPos={bull.y} angle={bull.angle} />
     {/each}
