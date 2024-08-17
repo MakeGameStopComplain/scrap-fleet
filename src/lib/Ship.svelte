@@ -84,13 +84,34 @@
         yPos -= Math.cos(angle * Math.PI / 180) * velocity;
         xPos += Math.sin(angle * Math.PI / 180) * velocity;
     }
+    function getGunPositions() {
+        let positions = [];
+        let r = 0, c = 0;
+        for (let row of body) {
+            for (let cell of row) {
+                if (cell.toUpperCase() == "G") {
+                    let radialAngle = Math.atan2(r - body.length / 2, c - body[0].length / 2);
+                    positions.push({
+                        x: xPos + Math.cos(radialAngle + angle * Math.PI / 180) * cellSize,
+                        y: yPos + Math.sin(radialAngle + angle * Math.PI / 180) * cellSize,
+                    });
+                }
+                c++;
+            }
+            r++;
+        }
+        console.log(positions)
+        return positions;
+    }
     export function createBullet() {
         let newBullets = [];
-        newBullets.push({
-            x: xPos,
-            y: yPos,
-            angle: angle,
-        });
+        for (let pos of getGunPositions()) {
+            newBullets.push({
+                x: pos.x,
+                y: pos.y,
+                angle: angle,
+            });
+        }
         return newBullets;
     }
 </script>
