@@ -15,6 +15,7 @@
     import damagedReactorSprite from "$lib/ship_assets/damaged_reactor.png";
     import thrusterFire1 from "$lib/ship_assets/thruster_fire_frame1.png";
     import thrusterFire2 from "$lib/ship_assets/thruster_fire_frame2.png";
+    import laserSound from "$lib/audio/laser_sound.wav";
 
     export let body = [
         [".",".",".",".",".",".","."],
@@ -92,8 +93,6 @@
             for (let cell of row) {
                 if (cell.toUpperCase() == "G") {
                     let radialAngle = Math.atan2(r - body.length / 2, c - body[0].length / 2);
-                    console.log(r - body.length / 2, c - body[0].length / 2)
-                    console.log(radialAngle)
                     positions.push({
                         x: xPos + Math.cos(radialAngle + angle * Math.PI / 180) * cellSize * 2,
                         y: yPos + Math.sin(radialAngle + angle * Math.PI / 180) * cellSize * 2,
@@ -115,6 +114,7 @@
                 angle: angle,
             });
         }
+        (new Audio(laserSound)).play();
         return newBullets;
     }
 </script>
