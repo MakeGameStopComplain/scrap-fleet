@@ -88,6 +88,7 @@
                 style:height="{cellSize}px"
                 style:background={fill}
                 style:background-size="contain"
+                style:transform="rotate(90deg)"
             ></div>
         {/each}
     {/each}
