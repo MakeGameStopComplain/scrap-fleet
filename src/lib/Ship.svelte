@@ -106,7 +106,6 @@
             }
             r++;
         }
-        console.log(positions)
         return positions;
     }
     export function createBullet() {
