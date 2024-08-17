@@ -116,6 +116,7 @@
                 x: pos.x,
                 y: pos.y,
                 angle: angle,
+                speed: 24 + velocity,
             });
         }
         (new Audio(laserSound)).play();

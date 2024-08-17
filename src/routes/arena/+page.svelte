@@ -15,7 +15,6 @@
     };
 
     let playerBullets = [];
-    let bulletSpeed = 24;
 
     let playerShipComponent;
 
@@ -39,8 +38,8 @@
         let i = 0;
         while (i < playerBullets.length) {
             let bull = playerBullets[i];
-            bull.y -= Math.cos(bull.angle * Math.PI / 180) * bulletSpeed;
-            bull.x += Math.sin(bull.angle * Math.PI / 180) * bulletSpeed;
+            bull.y -= Math.cos(bull.angle * Math.PI / 180) * bull.speed;
+            bull.x += Math.sin(bull.angle * Math.PI / 180) * bull.speed;
             if (bull.x <= 0 || bull.y <= 0 || bull.x >= arenaWidth || bull.y >= arenaHeight) {
                 playerBullets.splice(i, 1);
                 i--;
