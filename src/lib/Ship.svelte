@@ -1,6 +1,7 @@
 <script context="module">
     let current;
 </script>
+<svelte:options accessors={true} />
 
 <script>
     import { onMount } from "svelte";
@@ -54,23 +55,25 @@
         return false;
     };
     export let velocity = 0;
-    export let accelerating = false;
-    export function thrust(forward=true) {
-        if (forward) velocity += 0.5;
-        else velocity -= 0.5;
-        accelerating = true;
-    }
+    export let thrusting = 0;
     export function rotate(deg=5) {
         angle += deg;
     }
     export function tick() {
+        if (thrusting == 1) {
+            velocity += 0.5;
+        }
+        else if (thrusting == -1) {
+            velocity -= 0.5;
+        }
+        else if (thrusting == 0) {
+            velocity /= 1.05;
+        }
+
         velocity = Math.max(Math.min(velocity, 12), -12);
-        if (!accelerating) velocity /= 1.05;
 
         yPos -= Math.cos(angle * Math.PI / 180) * velocity;
         xPos += Math.sin(angle * Math.PI / 180) * velocity;
-
-        accelerating = false;
     }
 </script>
 
@@ -92,7 +95,7 @@
                 style:background-size="contain"
                 style:transform="rotate(90deg)"
             ></div>
-            {#if cell.toUpperCase() == "T"}
+            {#if cell.toUpperCase() == "T" && thrusting}
                 <div style:position="absolute"
                     style:top="{r * cellSize + cellSize}px"
                     style:left="{c * cellSize}px"

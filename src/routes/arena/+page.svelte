@@ -18,8 +18,10 @@
     let playerShipComponent;
 
     function tick() {
-        if (inputs["ArrowUp"]) playerShipComponent.thrust(true);
-        else if (inputs["ArrowDown"]) playerShipComponent.thrust(false);
+        if (inputs["ArrowUp"]) playerShipComponent.thrusting = 1;
+        else if (inputs["ArrowDown"]) playerShipComponent.thrusting = -1;
+        else playerShipComponent.thrusting = 0;
+
         if (inputs["ArrowRight"]) playerShipComponent.rotate(5);
         else if (inputs["ArrowLeft"]) playerShipComponent.rotate(-5);
         playerShipComponent.tick();
