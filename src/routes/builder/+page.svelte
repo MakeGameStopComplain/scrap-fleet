@@ -88,9 +88,11 @@
                 <td style:background-image={fillMap[cell]}
                     on:click={() => {
                         shipArr[r][c] = selectedTile;
+                        inventory[selectedTile]--;
                     }}
                     on:contextmenu={(e) => {
                         e.preventDefault();
+                        if (shipArr[r][c] != ".") inventory[shipArr[r][c]]++;
                         shipArr[r][c] = ".";
                     }}>
                 </td>
