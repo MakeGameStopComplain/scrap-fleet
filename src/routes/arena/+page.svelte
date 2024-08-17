@@ -1,6 +1,7 @@
 <script>
     import { onMount } from "svelte";
     import Ship from "$lib/Ship.svelte";
+    import Bullet from "$lib/Bullet.svelte";
     import { goto } from "$app/navigation";
     
     let world;
@@ -12,6 +13,9 @@
     };
     let playerVelocity = 0;
     let accelerating = false;
+
+    let playerBullets = [];
+    let bulletSpeed = 24;
 
     function tick() {
         if (inputs["ArrowUp"]) {
@@ -32,6 +36,30 @@
         playerPos.x += Math.sin(playerPos.angle * Math.PI / 180) * playerVelocity;
 
         setCamera(playerPos.x, playerPos.y);
+
+        if (inputs["x"]) {
+            playerBullets.push({
+                x: playerPos.x,
+                y: playerPos.y,
+                angle: playerPos.angle,
+            });
+            playerBullets = playerBullets;
+            inputs["x"] = false;
+        }
+
+        let i = 0;
+        while (i < playerBullets.length) {
+            let bull = playerBullets[i];
+            bull.y -= Math.cos(bull.angle * Math.PI / 180) * bulletSpeed;
+            bull.x += Math.sin(bull.angle * Math.PI / 180) * bulletSpeed;
+            if (bull.x <= 0 || bull.y <= 0 || bull.x >= arenaWidth || bull.y >= arenaHeight) {
+                playerBullets.splice(i, 1);
+                i--;
+            }
+            i++;
+        }
+        playerBullets = playerBullets;
+
 
         requestAnimationFrame(tick);
     }
@@ -91,6 +119,9 @@
 <div bind:this={world} id="world" style:top="{cameraTop}px" style:left="{cameraLeft}px"
     style:width="{arenaWidth}px" style:height="{arenaHeight}px">
     <Ship xPos={playerPos.x} yPos={playerPos.y} angle={playerPos.angle} body={playerShipBody} />
+    {#each playerBullets as bull}
+        <Bullet xPos={bull.x} yPos={bull.y} angle={bull.angle} />
+    {/each}
 </div>
 
 <button style:position="fixed"
