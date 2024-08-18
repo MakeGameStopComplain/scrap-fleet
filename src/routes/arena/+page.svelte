@@ -204,4 +204,12 @@
     #world {
         position: fixed;
     }
+
+    input[type=image] {
+        transition: transform 0.2s;
+    }
+
+    input[type=image]:hover {
+        transform: scale(1.1);
+    }
 </style>
