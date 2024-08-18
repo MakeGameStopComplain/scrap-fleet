@@ -119,6 +119,9 @@
                     style:background-color={canPlaceTile ? "#FF000055" : "#00000000"}
                     on:click={() => {
                         if (canPlaceTile) {
+                            if (shipArr[r][c] != ".") {
+                                inventory[shipArr[r][c]]++;
+                            }
                             shipArr[r][c] = selectedTile;
                             inventory[selectedTile]--;
                         }
