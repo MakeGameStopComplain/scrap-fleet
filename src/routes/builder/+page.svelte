@@ -163,8 +163,8 @@
     }
 
     table td {
-        width: 60px;
-        height: 60px;
+        width: 40px;
+        height: 40px;
         border: 1px solid red;
         transform: rotate(90deg);
         background-size: contain;
