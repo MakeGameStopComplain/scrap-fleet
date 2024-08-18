@@ -7,6 +7,7 @@
     import reactorSprite from "$lib/ship_assets/reactor.png";
     import thrusterSprite from "$lib/ship_assets/thruster.png";
     import menuMusic from "$lib/audio/menu_and_building_song.wav";
+    import startButton from "$lib/gui_assets/start_level.png";
 
     let fillMap = {
         ".": "",
@@ -46,7 +47,7 @@
     function saveButton() {
         getShipStr();
         localStorage.setItem("shipStr", shipStr);
-        goto("/");
+        goto("/arena");
     }
 
     onMount(() => {
@@ -142,7 +143,8 @@
     {/each}
 </table>
 <br />
-<button on:click={saveButton}>Return to le main menu</button>
+<input type="image" on:click={saveButton}
+    src={startButton} alt="START" style:width="200px" />
 
 <audio autoplay loop>
     <source src={menuMusic} type="audio/wav" />

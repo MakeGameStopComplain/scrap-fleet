@@ -33,10 +33,8 @@
     <div class="centered" style:text-align="center">
         <img src={logo} alt="SCRAP FLEET" width={400} />
         <br />
-        <input type="image" on:click={() => { goto("/arena"); }}
+        <input type="image" on:click={() => { goto("/builder"); }}
             src={startButtonImg} alt="START" style:width="200px" />
-        <br /> <br />
-        <button on:click={() => { goto("/builder"); }}>build</button>
     </div>
 </div>
 

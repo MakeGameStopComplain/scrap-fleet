@@ -6,6 +6,8 @@
     import backdrop1 from "$lib/backgrounds/background1.png";
     import themeSong from "$lib/audio/spaceship_main_theme.wav";
     import Enemy from "$lib/Enemy.svelte";
+    import resignButton from "$lib/gui_assets/concede.png";
+    import menuButton from "$lib/gui_assets/main_menu.png";
     
     let world;
 
@@ -136,12 +138,24 @@
     {/each}
 </div>
 
-<button style:position="fixed"
+<input type="image"
+    src={resignButton}
+    style:position="fixed"
     style:top="10px"
     style:right="10px"
+    style:width="140px"
+    on:click={() => {
+        goto("/builder");
+    }} alt="CONCEDE" />
+<input type="image"
+    src={menuButton}
+    style:position="fixed"
+    style:top="10px"
+    style:right="160px"
+    style:width="140px"
     on:click={() => {
         goto("/");
-    }}>Menu</button>
+    }} alt="MAIN MENU" />
 
 <audio autoplay loop>
     <source src={themeSong} type="audio/wav" />
