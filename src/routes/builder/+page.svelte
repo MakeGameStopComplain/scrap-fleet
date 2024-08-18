@@ -6,6 +6,7 @@
     import gunSprite from "$lib/ship_assets/laser_gun.png";
     import reactorSprite from "$lib/ship_assets/reactor.png";
     import thrusterSprite from "$lib/ship_assets/thruster.png";
+    import menuMusic from "$lib/audio/menu_and_building_song.wav";
 
     let fillMap = {
         ".": "",
@@ -136,6 +137,10 @@
 </table>
 <br />
 <button on:click={saveButton}>Return to le main menu</button>
+
+<audio autoplay loop>
+    <source src={menuMusic} type="audio/wav" />
+</audio>
 
 <style>
     :global(body) {
