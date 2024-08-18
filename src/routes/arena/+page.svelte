@@ -5,6 +5,7 @@
     import { goto } from "$app/navigation";
     import backdrop1 from "$lib/backgrounds/background1.png";
     import themeSong from "$lib/audio/spaceship_main_theme.wav";
+    import Enemy from "$lib/Enemy.svelte";
     
     let world;
 
@@ -17,6 +18,13 @@
     let playerBullets = [];
 
     let playerShipComponent;
+    
+    let enemies = [
+        {
+            type: "scout",
+            component: null,
+        }
+    ];
 
     function tick() {
         if (inputs["ArrowUp"]) playerShipComponent.thrusting = 1;
@@ -52,6 +60,13 @@
         if (playerPos.y < 0) playerPos.y = 0;
         if (playerPos.x > arenaWidth) playerPos.x = arenaWidth;
         if (playerPos.y > arenaHeight) playerPos.y = arenaHeight;
+
+        for (let baddy of enemies) {
+            baddy.component.tick();
+            for (let bull of playerBullets) {
+                baddy.component.checkBullet(bull);
+            }
+        }
 
         requestAnimationFrame(tick);
     }
@@ -115,6 +130,9 @@
     <Ship bind:xPos={playerPos.x} bind:yPos={playerPos.y} body={playerShipBody} bind:this={playerShipComponent} />
     {#each playerBullets as bull}
         <Bullet xPos={bull.x} yPos={bull.y} angle={bull.angle} />
+    {/each}
+    {#each enemies as baddy}
+        <Enemy type={baddy.type} bind:this={baddy.component} />
     {/each}
 </div>
 
