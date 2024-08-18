@@ -47,6 +47,7 @@
     function saveButton() {
         getShipStr();
         localStorage.setItem("shipStr", shipStr);
+        localStorage.setItem("inventory", JSON.stringify(inventory));
         goto("/arena");
     }
 
