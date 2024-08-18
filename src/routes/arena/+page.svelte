@@ -14,7 +14,7 @@
     let inputs = {};
 
     let playerPos = {
-        x: 200, y: 200, angle: 0,
+        x: 600, y: 500, angle: 0,
     };
 
     let playerBullets = [];
@@ -72,7 +72,7 @@
             for (let bull of playerBullets) {
                 baddy.component.checkBullet(bull);
             }
-            if (frame % 36 == 0) {
+            if (frame % 100 == 0) {
                 enemyBullets = [...enemyBullets, ...baddy.component.createBullet()];
             }
         }
@@ -166,7 +166,7 @@
         <Bullet xPos={bull.x} yPos={bull.y} angle={bull.angle} blue />
     {/each}
     {#each enemies as baddy}
-        <Enemy type={baddy.type} bind:this={baddy.component} />
+        <Enemy type={baddy.type} bind:this={baddy.component} playerPos={playerPos} />
     {/each}
     {#each enemyBullets as bull}
         <Bullet xPos={bull.x} yPos={bull.y} angle={bull.angle} />
