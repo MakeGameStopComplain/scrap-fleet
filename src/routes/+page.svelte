@@ -35,6 +35,13 @@
         <br />
         <input type="image" on:click={() => { goto("./builder"); }}
             src={startButtonImg} alt="START" style:width="200px" />
+        <br /> <br />
+        <button on:click={() => {
+            if (confirm("you sure?")) {
+                localStorage.clear();
+                location.reload();
+            }
+        }}>Reset game data</button>
     </div>
 </div>
 
