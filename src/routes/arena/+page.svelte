@@ -163,7 +163,7 @@
     style:background-position="center">
     <Ship bind:xPos={playerPos.x} bind:yPos={playerPos.y} body={playerShipBody} bind:this={playerShipComponent} />
     {#each playerBullets as bull}
-        <Bullet xPos={bull.x} yPos={bull.y} angle={bull.angle} />
+        <Bullet xPos={bull.x} yPos={bull.y} angle={bull.angle} blue />
     {/each}
     {#each enemies as baddy}
         <Enemy type={baddy.type} bind:this={baddy.component} />

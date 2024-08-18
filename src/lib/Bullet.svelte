@@ -4,13 +4,21 @@
 
 <script>
     import { onMount } from "svelte";
-    import bulletSprite from "$lib/ship_assets/laser_bullet.png";
+    import redBullet from "$lib/ship_assets/laser_bullet.png";
+    import blueBullet from "$lib/ship_assets/bulletBlue.png";
 
     //let radius = 5;
 
     export let xPos = 200;
     export let yPos = 200;
     export let angle = 0;
+
+    let bulletSprite = redBullet;
+    export let blue = false;
+
+    onMount(() => {
+        if (blue) bulletSprite = blueBullet;
+    });
 </script>
 
 <div style:position="absolute"
