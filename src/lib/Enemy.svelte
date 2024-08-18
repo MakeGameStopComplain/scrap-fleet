@@ -28,15 +28,16 @@
     }
 
     let speed = 4;
-    let engagementRing = 500;
-    let rotationalSpeed = 0.1;
+    let engagementRing = 600;
+    let rotationalSpeed = 0.05;
     export function tick() {
         if (!engaged) angle += 2;
         else {
             let dangle = Math.atan2(playerPos.y - yPos, playerPos.x - xPos) * 180 / Math.PI + 90;
+            angle = angle % 360;
             angle = dangle * rotationalSpeed + angle * (1 - rotationalSpeed);
-            xPos += Math.cos(angle) * speed;
-            yPos += Math.sin(angle) * speed;
+            xPos += Math.cos((angle - 90) * Math.PI / 180) * speed;
+            yPos += Math.sin((angle - 90) * Math.PI / 180) * speed;
         }
 
         if (Math.pow(playerPos.x - xPos, 2) + Math.pow(playerPos.y - yPos, 2) <= Math.pow(engagementRing, 2)) {
