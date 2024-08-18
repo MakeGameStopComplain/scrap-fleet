@@ -27,9 +27,32 @@
     });
 </script>
 
-<button on:click={() => { goto("/arena"); }}>fight</button>
-<button on:click={() => { goto("/builder"); }}>build</button>
+<div id="mainScreen">
+    <div class="centered">
+        <button on:click={() => { goto("/arena"); }}>fight</button>
+        <button on:click={() => { goto("/builder"); }}>build</button>
+    </div>
+</div>
 
 <audio autoplay loop>
     <source src={menuMusic} type="audio/wav" />
 </audio>
+
+<style>
+    #mainScreen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-size: cover;
+        background-position: center;
+        background-image: url($lib/backgrounds/background1.png);
+    }
+
+    .centered {
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+    }
+</style>
