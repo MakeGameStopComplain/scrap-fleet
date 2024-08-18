@@ -98,9 +98,10 @@
             for (let cell of row) {
                 if (cell.toUpperCase() == "G") {
                     let radialAngle = Math.atan2(r - body.length / 2, c - body[0].length / 2);
+                    let radialDistance = Math.sqrt(Math.pow(r - body.length / 2, 2) + Math.pow(c - body[0].length / 2, 2));
                     positions.push({
-                        x: xPos + Math.cos(radialAngle + angle * Math.PI / 180) * cellSize * 2,
-                        y: yPos + Math.sin(radialAngle + angle * Math.PI / 180) * cellSize * 2,
+                        x: xPos + Math.cos(radialAngle + angle * Math.PI / 180) * cellSize * radialDistance,
+                        y: yPos + Math.sin(radialAngle + angle * Math.PI / 180) * cellSize * radialDistance,
                     });
                 }
                 c++;
