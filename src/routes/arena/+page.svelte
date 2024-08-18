@@ -82,10 +82,18 @@
             let bull = enemyBullets[i];
             bull.y -= Math.cos(bull.angle * Math.PI / 180) * bull.speed;
             bull.x += Math.sin(bull.angle * Math.PI / 180) * bull.speed;
-            if (bull.x <= 0 || bull.y <= 0 || bull.x >= arenaWidth || bull.y >= arenaHeight) {
-                enemyBullets.splice(i, 1);
-                i--;
+
+            if (frame % 10 == 0) {
+                if (bull.x <= 0 || bull.y <= 0 || bull.x >= arenaWidth || bull.y >= arenaHeight) {
+                    enemyBullets.splice(i, 1);
+                    i--;
+                }
+                else if (playerShipComponent.checkBullet(bull)) {
+                    enemyBullets.splice(i, 1);
+                    i--;
+                }
             }
+
             i++;
         }
         enemyBullets = enemyBullets;

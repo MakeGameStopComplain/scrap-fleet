@@ -30,7 +30,7 @@
     let cellSize = 36;
 
     let fillMap = {
-        ".": "transparent",
+        ".": "",
         "B": `url("${blockSprite}")`,
         "C": `url("${cockpitSprite}")`,
         "G": `url("${gunSprite}")`,
@@ -47,8 +47,8 @@
         let checkAngle = incomingAngle - angle * Math.PI / 180;
         let checkR = Math.round((Math.sin(checkAngle) * incomingDistance) / cellSize);
         let checkC = Math.round((Math.cos(checkAngle) * incomingDistance) / cellSize);
-        if (checkR >= 0 && checkC >= 0 && checkR <= body.length && checkC <= body[0].length) {
-            if (body[checkR][checkC] == ".") {
+        if (checkR >= 0 && checkC >= 0 && checkR < body.length && checkC < body[0].length) {
+            if (body[checkR][checkC] != ".") {
                 body[checkR][checkC] = ".";
                 return true;
             }
@@ -139,7 +139,7 @@
                 style:left="{c * cellSize}px"
                 style:width="{cellSize}px"
                 style:height="{cellSize}px"
-                style:background={fill}
+                style:background-image={fill}
                 style:background-size="contain"
                 style:transform="rotate(90deg)"
             ></div>
