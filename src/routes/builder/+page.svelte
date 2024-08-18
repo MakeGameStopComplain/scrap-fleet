@@ -53,6 +53,9 @@
         if (localStorage.getItem("shipStr")) {
             shipStr = localStorage.getItem("shipStr");
         }
+        if (localStorage.getItem("inventory")) {
+            inventory = JSON.parse(localStorage.getItem("inventory"));
+        }
         getShipArr();
     });
 
