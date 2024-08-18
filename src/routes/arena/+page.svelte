@@ -18,6 +18,7 @@
     };
 
     let playerBullets = [];
+    let enemyBullets = [];
 
     let playerShipComponent;
     
@@ -28,7 +29,10 @@
         }
     ];
 
+    let frame = 0;
     function tick() {
+        frame++;
+
         if (inputs["ArrowUp"]) playerShipComponent.thrusting = 1;
         else if (inputs["ArrowDown"]) playerShipComponent.thrusting = -1;
         else playerShipComponent.thrusting = 0;
@@ -68,7 +72,30 @@
             for (let bull of playerBullets) {
                 baddy.component.checkBullet(bull);
             }
+            if (frame % 36 == 0) {
+                enemyBullets = [...enemyBullets, baddy.component.createBullet()];
+            }
         }
+
+        i = 0;
+        while (i < enemyBullets.length) {
+            let bull = enemyBullets[i];
+            bull.y -= Math.cos(bull.angle * Math.PI / 180) * bull.speed;
+            bull.x += Math.sin(bull.angle * Math.PI / 180) * bull.speed;
+            if (bull.x <= 0 || bull.y <= 0 || bull.x >= arenaWidth || bull.y >= arenaHeight) {
+                enemyBullets.splice(i, 1);
+                i--;
+            }
+            i++;
+        }
+        enemyBullets = enemyBullets;
+
+        i = 0;
+        while (i < enemies.length) {
+            if (!enemies[i].component.alive) enemies.splice(i, 1);
+            else i++;
+        }
+        enemies = enemies;
 
         requestAnimationFrame(tick);
     }
@@ -135,6 +162,9 @@
     {/each}
     {#each enemies as baddy}
         <Enemy type={baddy.type} bind:this={baddy.component} />
+    {/each}
+    {#each enemyBullets as bull}
+        <Bullet xPos={bull.x} yPos={bull.y} angle={bull.angle} />
     {/each}
 </div>
 

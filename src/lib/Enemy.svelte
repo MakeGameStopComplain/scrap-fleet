@@ -24,7 +24,15 @@
         if (distance < 75) alive = false;
     }
     export function tick() {
-        angle += 10;
+        //angle += 10;
+    }
+    export function createBullet() {
+        return {
+            x: xPos,
+            y: yPos,
+            angle: angle,
+            speed: 24,
+        };
     }
 </script>
 
