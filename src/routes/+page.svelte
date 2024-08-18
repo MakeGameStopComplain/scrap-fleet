@@ -2,6 +2,8 @@
     import { goto } from "$app/navigation";
     import menuMusic from "$lib/audio/menu_and_building_song.wav";
     import { onMount } from "svelte";
+    import startButtonImg from "$lib/gui_assets/start.png";
+    import logo from "$lib/gui_assets/scrap_fleet_logo.png";
 
     onMount(() => {
         if (!localStorage.getItem("shipStr")) {
@@ -28,8 +30,12 @@
 </script>
 
 <div id="mainScreen">
-    <div class="centered">
-        <button on:click={() => { goto("/arena"); }}>fight</button>
+    <div class="centered" style:text-align="center">
+        <img src={logo} alt="SCRAP FLEET" width={400} />
+        <br />
+        <input type="image" on:click={() => { goto("/arena"); }}
+            src={startButtonImg} alt="START" style:width="200px" />
+        <br /> <br />
         <button on:click={() => { goto("/builder"); }}>build</button>
     </div>
 </div>
@@ -54,5 +60,13 @@
         position: absolute;
         top: 50%; left: 50%;
         transform: translate(-50%, -50%);
+    }
+
+    input[type=image] {
+        transition: transform 0.2s;
+    }
+
+    input[type=image]:hover {
+        transform: scale(1.1);
     }
 </style>
