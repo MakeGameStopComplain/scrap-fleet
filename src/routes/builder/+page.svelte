@@ -161,6 +161,9 @@
     :global(body) {
         margin: none;
         background-color: black;
+        background-image: url($lib/hangar.png);
+        background-size: cover;
+        background-position: center;
     }
 
     table td {
