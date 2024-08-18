@@ -26,6 +26,9 @@
                 "T": 0,
             }));
         }
+        if (!localStorage.getItem("levelOn")) {
+            localStorage.setItem("levelOn", 1);
+        }
     });
 </script>
 

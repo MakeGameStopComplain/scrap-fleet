@@ -103,6 +103,7 @@
     let playerShipBody = [];
     let shipStr = "";
 
+    let levelOn;
     onMount(() => {
         if (localStorage.getItem("shipStr")) {
             shipStr = localStorage.getItem("shipStr");
@@ -125,6 +126,10 @@
             playerShipBody.push(row);
         }
         playerShipBody = playerShipBody;
+
+        if (localStorage.getItem("levelOn")) {
+            levelOn = parseFloat(localStorage.getItem("levelOn"));
+        }
 
         window.addEventListener("keydown", (e) => {
             inputs[e.key] = true;
