@@ -145,7 +145,7 @@
     style:right="10px"
     style:width="140px"
     on:click={() => {
-        goto("/builder");
+        goto("../builder");
     }} alt="CONCEDE" />
 <input type="image"
     src={menuButton}
@@ -154,7 +154,7 @@
     style:right="160px"
     style:width="140px"
     on:click={() => {
-        goto("/");
+        goto("../");
     }} alt="MAIN MENU" />
 
 <audio autoplay loop>

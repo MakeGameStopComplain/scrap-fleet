@@ -22,3 +22,5 @@ vite.config.ts.timestamp-*
 
 package-lock.json
 .npmrc
+
+build.zip
