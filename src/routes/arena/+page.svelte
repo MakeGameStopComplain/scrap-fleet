@@ -73,7 +73,7 @@
                 baddy.component.checkBullet(bull);
             }
             if (frame % 36 == 0) {
-                enemyBullets = [...enemyBullets, baddy.component.createBullet()];
+                enemyBullets = [...enemyBullets, ...baddy.component.createBullet()];
             }
         }
 

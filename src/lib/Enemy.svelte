@@ -24,15 +24,25 @@
         if (distance < 75) alive = false;
     }
     export function tick() {
-        //angle += 10;
+        angle += 2;
     }
     export function createBullet() {
-        return {
-            x: xPos,
-            y: yPos,
-            angle: angle,
-            speed: 24,
-        };
+        if (type == "scout") {
+            let dist = 25;
+            let angle1 = Math.PI * 7 / 4 + angle * Math.PI / 180;
+            let angle2 = Math.PI * 5 / 4 + angle * Math.PI / 180;
+            return [{
+                x: xPos + Math.cos(angle1) * dist,
+                y: yPos + Math.sin(angle1) * dist,
+                angle: angle,
+                speed: 24,
+            }, {
+                x: xPos + Math.cos(angle2) * dist,
+                y: yPos + Math.sin(angle2) * dist,
+                angle: angle,
+                speed: 24,
+            }];
+        }
     }
 </script>
 
