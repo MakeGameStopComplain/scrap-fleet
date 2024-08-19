@@ -89,6 +89,23 @@
                 speed: 24,
             }];
         }
+        else if (type == "fighter") {
+            let dist = 32;
+            let angle1 = Math.PI * 7 / 4 + angle * Math.PI / 180;
+            let angle2 = Math.PI * 5 / 4 + angle * Math.PI / 180;
+            return [{
+                x: xPos + Math.cos(angle1) * dist,
+                y: yPos + Math.sin(angle1) * dist,
+                angle: angle,
+                speed: 24,
+            }, {
+                x: xPos + Math.cos(angle2) * dist,
+                y: yPos + Math.sin(angle2) * dist,
+                angle: angle,
+                speed: 24,
+            }];
+        }
+        return [];
     }
 
     onMount(() => {
@@ -99,6 +116,14 @@
             hitboxRadius = 120;
             engagementRing = 1200;
             health = 5;
+        }
+        else if (type == "fighter") {
+            angle = 90;
+            speed = 6;
+            engagementRing = 400;
+            rotationalSpeed = 0.2;
+            health = 3;
+            hitboxRadius = 75;
         }
     });
 </script>

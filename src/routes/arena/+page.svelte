@@ -30,7 +30,7 @@
     
     let enemies = [
         {
-            type: "carrier",
+            type: "fighter",
             component: null,
             x: 100, y: 100,
         },
@@ -120,6 +120,7 @@
                     let bull = playerBullets[i];
                     if (baddy.component.checkBullet(bull)) {
                         playerBullets.splice(i, 1);
+                        i--;
                     }
                     if (baddy.component.health == 0) {
                         collectables = [...collectables, {
@@ -128,7 +129,6 @@
                             type: "B",
                             angle: 0,
                         }];
-                        i--;
                     }
                     i++;
                 }
