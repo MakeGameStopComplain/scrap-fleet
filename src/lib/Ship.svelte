@@ -47,11 +47,12 @@
     export let yPos = 200;
     export let angle = 0;
     export function checkBullet(bulletPos) {
-        let radialAngle = Math.atan2(bulletPos.y - yPos, bulletPos.x - xPos) + Math.PI / 2 - angle * Math.PI / 180;
+        let radialAngle = Math.atan2(xPos - bulletPos.x, yPos - bulletPos.y) + angle * Math.PI / 180;
         let radialDistance = Math.sqrt(Math.pow(bulletPos.y - yPos, 2) + Math.pow(bulletPos.x - xPos, 2));
-        let r = Math.round(body.length / 2 - Math.cos(radialAngle) * radialDistance / cellSize);
-        let c = Math.round(body[0].length / 2 - Math.sin(radialAngle) * radialDistance / cellSize) - 1;
+        let r = Math.floor(body.length / 2 - Math.cos(radialAngle) * radialDistance / cellSize);
+        let c = Math.floor(body[0].length / 2 - Math.sin(radialAngle) * radialDistance / cellSize);
 
+        console.log(r, c)
         if (r >= 0 && r < body.length && c >= 0 && c < body[0].length) {
             if (body[r][c] != body[r][c].toLowerCase()) {
                 body[r][c] = body[r][c].toLowerCase();

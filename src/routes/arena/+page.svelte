@@ -88,7 +88,7 @@
             bull.y -= Math.cos(bull.angle * Math.PI / 180) * bull.speed;
             bull.x += Math.sin(bull.angle * Math.PI / 180) * bull.speed;
 
-            if (frame % 10 == 0) {
+            if (frame % 2 == 0) {
                 if (bull.x <= 0 || bull.y <= 0 || bull.x >= arenaWidth || bull.y >= arenaHeight) {
                     enemyBullets.splice(i, 1);
                     i--;
@@ -151,6 +151,15 @@
             inputs[e.key] = false;
         });
         tick();
+
+        window.addEventListener("click", (e) => {
+            /*enemyBullets.push({
+                x: e.clientX - cameraLeft,
+                y: e.clientY - cameraTop,
+                speed: 0,
+                angle: 0,
+            });*/
+        });
     });
 
     let arenaWidth = 2000, arenaHeight = 2000;
