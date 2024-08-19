@@ -90,7 +90,7 @@
         else if (inputs["ArrowLeft"]) playerShipComponent.rotate(-5);
         playerShipComponent.tick();
 
-        setCamera(playerPos.x, playerPos.y);
+        if (frame % 3 == 0) setCamera(playerPos.x, playerPos.y);
 
         if (inputs["x"]) {
             let newBullets = playerShipComponent.createBullet();
@@ -274,6 +274,7 @@
 <div bind:this={world} id="world" style:top="{cameraTop}px" style:left="{cameraLeft}px"
     style:width="{arenaWidth}px" style:height="{arenaHeight}px"
     style:background-image="url('{backdrop1}')" style:background-size="cover"
+    style:transition="top 0.1s, left 0.1s"
     style:background-position="center">
     <Ship bind:xPos={playerPos.x} bind:yPos={playerPos.y} bind:body={playerShipBody} bind:this={playerShipComponent} />
     {#each playerBullets as bull}
