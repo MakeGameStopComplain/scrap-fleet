@@ -65,6 +65,7 @@
         }
     }
     export function createBullet() {
+        if (!alive) return [];
         if (!engaged) return [];
         (new Audio(laserSound)).play();
         if (type == "scout") {

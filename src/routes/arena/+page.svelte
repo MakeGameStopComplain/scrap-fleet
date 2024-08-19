@@ -33,23 +33,27 @@
             type: "fighter",
             component: null,
             x: 100, y: 100,
+            alive: true,
         },
         {
             type: "scout",
             component: null,
             x: 1900, y: 1900,
+            alive: true,
         },
 
         {
             type: "scout",
             component: null,
             x: 1900, y: 100,
+            alive: true,
         },
 
         {
             type: "carrier",
             component: null,
             x: 100, y: 1900,
+            alive: true,
         },
     ];
 
@@ -163,12 +167,19 @@
         }
         enemyBullets = enemyBullets;
 
-        i = 0;
+        /*i = 0;
         while (i < enemies.length) {
-            if (!enemies[i].component.alive) enemies.splice(i, 1);
+            if (enemies[i].alive === false) {
+                enemies.splice(i, 1);
+                break;
+            }
             else i++;
         }
-        enemies = enemies;
+        enemies = enemies;*/
+        enemiesRemaining = 0;
+        for (let baddy of enemies) {
+            if (baddy.alive) enemiesRemaining++;
+        }
 
         i = 0;
         while (i < collectables.length) {
@@ -195,6 +206,7 @@
 
     let levelOn;
     let inventory;
+    let enemiesRemaining = 1;
     onMount(() => {
         if (localStorage.getItem("shipStr")) {
             shipStr = localStorage.getItem("shipStr");
@@ -234,14 +246,14 @@
         });
         tick();
 
-        window.addEventListener("click", (e) => {
-            /*enemyBullets.push({
+        /*window.addEventListener("click", (e) => {
+            enemyBullets.push({
                 x: e.clientX - cameraLeft,
                 y: e.clientY - cameraTop,
                 speed: 0,
                 angle: 0,
-            });*/
-        });
+            });
+        });*/
     });
 
     let arenaWidth = 2000, arenaHeight = 2000;
@@ -271,7 +283,7 @@
     {/each}
     {#each enemies as baddy}
         <Enemy type={baddy.type} bind:this={baddy.component} playerPos={playerPos}
-            bind:xPos={baddy.x} bind:yPos={baddy.y} />
+            bind:xPos={baddy.x} bind:yPos={baddy.y} bind:alive={baddy.alive} />
     {/each}
     {#each enemyBullets as bull}
         <Bullet xPos={bull.x} yPos={bull.y} angle={bull.angle} />
@@ -286,10 +298,10 @@
     style:left="20px"
     style:color="white">
     Level {levelOn} <br />    
-    Enemies remaining: {enemies.length}
+    Enemies remaining: {enemiesRemaining}
 </span>
 
-{#if enemies.length == 0}
+{#if enemiesRemaining == 0}
     <div style:position="fixed"
         style:text-align="center"
         style:top="50vh"
