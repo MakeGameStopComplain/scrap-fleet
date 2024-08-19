@@ -43,6 +43,7 @@
     let speed = 4;
     let engagementRing = 600;
     let rotationalSpeed = 0.05;
+    let orbitRadius = 400;
     export function tick() {
         if (!engaged) {
             if (type == "scout") angle += 2;
@@ -52,8 +53,11 @@
             angle = angle % 360;
             angle = dangle * rotationalSpeed + angle * (1 - rotationalSpeed);
             angle = angle % 360;
-            xPos += Math.cos((angle - 90) * Math.PI / 180) * speed;
-            yPos += Math.sin((angle - 90) * Math.PI / 180) * speed;
+            let distFromPlayer = Math.sqrt(Math.pow(playerPos.y - yPos, 2) + Math.pow(playerPos.x - xPos, 2));
+            if (distFromPlayer >= orbitRadius) {
+                xPos += Math.cos((angle - 90) * Math.PI / 180) * speed;
+                yPos += Math.sin((angle - 90) * Math.PI / 180) * speed;
+            }
         }
 
         if (Math.pow(playerPos.x - xPos, 2) + Math.pow(playerPos.y - yPos, 2) <= Math.pow(engagementRing, 2)) {
@@ -120,7 +124,7 @@
         else if (type == "fighter") {
             angle = 90;
             speed = 6;
-            engagementRing = 400;
+            engagementRing = 414;
             rotationalSpeed = 0.2;
             health = 3;
             hitboxRadius = 75;
