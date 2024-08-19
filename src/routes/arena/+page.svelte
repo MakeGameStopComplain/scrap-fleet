@@ -120,7 +120,9 @@
         }
         enemies = enemies;
 
-        if (frame > 10 && enemies.length == 0) exitStage(true);
+        if (frame > 10 && enemies.length == 0) setTimeout(() => {
+            exitStage(true);
+        }, 2222);
 
         requestAnimationFrame(tick);
     }
@@ -232,6 +234,17 @@
     Level {levelOn} <br />    
     Enemies remaining: {enemies.length}
 </span>
+
+{#if enemies.length == 0}
+    <span style:position="fixed"
+        style:top="50vh"
+        style:left="50vw"
+        style:transform="translate(-50%, -50%)"
+        style:font-size="93px"
+        style:color="white">
+        Level complete!
+    </span>
+{/if}
 
 <audio autoplay loop>
     <source src={themeSong} type="audio/wav" />
