@@ -13,6 +13,8 @@
     import thrustSound from "$lib/audio/fixed_thruster_sound.wav";
     import "$lib/copperplate/font.css";
     import levelCompleteSign from "$lib/gui_assets/levelComplete.png";
+    import pickupSound from "$lib/audio/pickup_sound.wav";
+    import blockHitSound from "$lib/audio/building_sounnd.wav";
     
     let world;
 
@@ -159,6 +161,7 @@
                 else if (playerShipComponent.checkBullet(bull)) {
                     enemyBullets.splice(i, 1);
                     i--;
+                    (new Audio(blockHitSound)).play();
                 }
 
             i++;
@@ -187,6 +190,7 @@
                 inventory[coll.type]++;
                 collectables.splice(i, 1);
                 i--;
+                (new Audio(pickupSound)).play();
             }
             i++;
         }
@@ -343,6 +347,8 @@
             e.target.currentTime = 0;
             e.target.play();
         }
+    }} on:play={(e) => {
+        e.target.volume = 0.3;
     }}>
         <source src={thrustSound} type="audio/wav" />
     </audio>

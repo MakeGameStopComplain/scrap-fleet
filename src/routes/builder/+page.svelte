@@ -9,6 +9,8 @@
     import menuMusic from "$lib/audio/menu_and_building_song.wav";
     import startButton from "$lib/gui_assets/start_level.png";
     import bgImage from "$lib/hangar.png";
+    import buildSound from "$lib/audio/building_sounnd.wav";
+    import deleteSound from "$lib/audio/erase_block.wav";
 
     let fillMap = {
         ".": "",
@@ -142,6 +144,7 @@
                                 }
                                 shipArr[r][c] = selectedTile;
                                 inventory[selectedTile]--;
+                                (new Audio(buildSound)).play();
                             }
                         }}
                         on:contextmenu={(e) => {
@@ -149,6 +152,7 @@
                             if ((r != 3 || c != 3) && shipArr[r][c] != ".") {
                                 inventory[shipArr[r][c]]++;
                                 shipArr[r][c] = ".";
+                                (new Audio(deleteSound)).play();
                             }
                         }}>
                     </td>
