@@ -26,6 +26,7 @@
         {
             type: "scout",
             component: null,
+            x: 100, y: 100,
         }
     ];
 
@@ -75,6 +76,10 @@
             if (frame % 100 == 0) {
                 enemyBullets = [...enemyBullets, ...baddy.component.createBullet()];
             }
+            if (baddy.x < 0) baddy.x = 0;
+            if (baddy.y < 0) baddy.y = 0;
+            if (baddy.x > arenaWidth) baddy.x = arenaWidth;
+            if (baddy.y > arenaHeight) baddy.y = arenaHeight;
         }
 
         i = 0;
@@ -174,7 +179,8 @@
         <Bullet xPos={bull.x} yPos={bull.y} angle={bull.angle} blue />
     {/each}
     {#each enemies as baddy}
-        <Enemy type={baddy.type} bind:this={baddy.component} playerPos={playerPos} />
+        <Enemy type={baddy.type} bind:this={baddy.component} playerPos={playerPos}
+            bind:xPos={baddy.x} bind:yPos={baddy.y} />
     {/each}
     {#each enemyBullets as bull}
         <Bullet xPos={bull.x} yPos={bull.y} angle={bull.angle} />
