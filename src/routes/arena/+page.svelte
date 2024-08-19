@@ -9,6 +9,7 @@
     import resignButton from "$lib/gui_assets/concede.png";
     import menuButton from "$lib/gui_assets/main_menu.png";
     import Collectable from "$lib/Collectable.svelte";
+    import thrustSound from "$lib/audio/thruster_sound.wav";
     
     let world;
 
@@ -279,6 +280,12 @@
 <audio autoplay loop>
     <source src={themeSong} type="audio/wav" />
 </audio>
+
+{#if playerShipComponent && playerShipComponent.thrusting}
+    <audio autoplay loop>
+        <source src={thrustSound} type="audio/wav" />
+    </audio>
+{/if}
 
 <style>
     :global(body) {
