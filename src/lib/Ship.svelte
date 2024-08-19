@@ -36,20 +36,29 @@
         "G": `url("${gunSprite}")`,
         "R": `url("${reactorSprite}")`,
         "T": `url("${thrusterSprite}")`,
+        "b": `url("${damagedBlockSprite}")`,
+        "c": `url("${damagedCockpitSprite}")`,
+        "g": ``,
+        "r": `url("${damagedReactorSprite}")`,
+        "t": ``,
     };
 
     export let xPos = 200;
     export let yPos = 200;
     export let angle = 0;
-    export function checkBullet(bulletPos) { 
-        let incomingAngle = Math.atan2(yPos - bulletPos.y, bulletPos.x - xPos);
-        let incomingDistance = Math.sqrt(Math.pow(bulletPos.y - yPos, 2), Math.pow(bulletPos.x - xPos, 2));
-        let checkAngle = incomingAngle + 90 - angle * Math.PI / 180;
-        let checkR = Math.round(body.length / 2 - (Math.sin(checkAngle) * incomingDistance) / cellSize);
-        let checkC = Math.round(body[0].length / 2 - (Math.cos(checkAngle) * incomingDistance) / cellSize);
-        if (checkR >= 0 && checkC >= 0 && checkR < body.length && checkC < body[0].length) {
-            if (body[checkR][checkC] != ".") {
-                body[checkR][checkC] = ".";
+    export function checkBullet(bulletPos) {
+        let radialAngle = Math.atan2(bulletPos.y - yPos, bulletPos.x - xPos) + Math.PI / 2 - angle * Math.PI / 180;
+        let radialDistance = Math.sqrt(Math.pow(bulletPos.y - yPos, 2) + Math.pow(bulletPos.x - xPos, 2));
+        let r = Math.round(body.length / 2 - Math.cos(radialAngle) * radialDistance / cellSize);
+        let c = Math.round(body[0].length / 2 - Math.sin(radialAngle) * radialDistance / cellSize) - 1;
+
+        if (r >= 0 && r < body.length && c >= 0 && c < body[0].length) {
+            if (body[r][c] != body[r][c].toLowerCase()) {
+                body[r][c] = body[r][c].toLowerCase();
+                return true;
+            }
+            else if (body[r][c] != ".") {
+                body[r][c] = ".";
                 return true;
             }
         }
@@ -70,6 +79,16 @@
         return count;
     }
     let fireFrame = 1;
+
+    function gridIndexToCoords(r, c) {
+        let radialAngle = Math.atan2(r - body.length / 2, c - body[0].length / 2);
+        let radialDistance = Math.sqrt(Math.pow(r - body.length / 2, 2) + Math.pow(c - body[0].length / 2, 2));
+        return {
+            x: xPos + Math.cos(radialAngle + angle * Math.PI / 180) * cellSize * radialDistance,
+            y: yPos + Math.sin(radialAngle + angle * Math.PI / 180) * cellSize * radialDistance,
+        };
+    }
+
     export function tick() {
         let thrusterCount = getThrusterCount();
         if (thrusting == 1) {
@@ -79,7 +98,7 @@
             velocity -= 0.5 * thrusterCount;
         }
         else if (thrusting == 0) {
-            velocity /= 1.05;
+            velocity /= 1.01;
         }
 
         velocity = Math.max(Math.min(velocity, 7 * thrusterCount), -7 * thrusterCount);
@@ -123,6 +142,10 @@
         (new Audio(laserSound)).play();
         return newBullets;
     }
+
+    onMount(() => {
+        
+    });
 </script>
 
 <div style:position="absolute"

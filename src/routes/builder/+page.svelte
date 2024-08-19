@@ -159,11 +159,13 @@
 
 <style>
     :global(body) {
-        margin: none;
+        margin: 0;
         background-color: black;
         background-image: url($lib/hangar.png);
         background-size: cover;
         background-position: center;
+        width: 100vw;
+        height: 100vh;
     }
 
     table td {

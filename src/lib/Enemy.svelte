@@ -36,6 +36,7 @@
             let dangle = Math.atan2(playerPos.y - yPos, playerPos.x - xPos) * 180 / Math.PI + 90;
             angle = angle % 360;
             angle = dangle * rotationalSpeed + angle * (1 - rotationalSpeed);
+            angle = angle % 360;
             xPos += Math.cos((angle - 90) * Math.PI / 180) * speed;
             yPos += Math.sin((angle - 90) * Math.PI / 180) * speed;
         }
