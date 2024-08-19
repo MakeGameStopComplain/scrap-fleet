@@ -1,7 +1,7 @@
 {
     "name": "Scrap Fleet",
     "desc": "game by kevin & yikuan",
-    "platforms": [ "linux" ],
+    "platforms": [ "linux", "mac", "windows" ],
     "version": "1.0.0",
     "icon": "favicon.png"
 }
