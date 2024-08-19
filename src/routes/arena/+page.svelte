@@ -56,6 +56,16 @@
         if (success) {
             localStorage.setItem("inventory", JSON.stringify(inventory));
             localStorage.setItem("levelOn", levelOn + 1);
+            let rows = [];
+            for (let row of playerShipBody) {
+                let rowStr = "";
+                for (let cell of row) {
+                    rowStr += cell.toUpperCase();
+                }
+                rows.push(rowStr);
+            }
+            let shipFinal = rows.join("\n");
+            localStorage.setItem("shipStr", shipFinal);
             goto("../builder");
         }
         else {
@@ -247,7 +257,7 @@
     style:width="{arenaWidth}px" style:height="{arenaHeight}px"
     style:background-image="url('{backdrop1}')" style:background-size="cover"
     style:background-position="center">
-    <Ship bind:xPos={playerPos.x} bind:yPos={playerPos.y} body={playerShipBody} bind:this={playerShipComponent} />
+    <Ship bind:xPos={playerPos.x} bind:yPos={playerPos.y} bind:body={playerShipBody} bind:this={playerShipComponent} />
     {#each playerBullets as bull}
         <Bullet xPos={bull.x} yPos={bull.y} angle={bull.angle} blue />
     {/each}
