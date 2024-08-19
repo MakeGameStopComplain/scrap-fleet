@@ -1,0 +1,6 @@
+@font-face {
+    font-family: "Copperplate";
+    src:
+        local("Copperplate"),
+        url("./Copperplate.otf") format("opentype");
+}

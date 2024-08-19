@@ -10,6 +10,7 @@
     import menuButton from "$lib/gui_assets/main_menu.png";
     import Collectable from "$lib/Collectable.svelte";
     import thrustSound from "$lib/audio/fixed_thruster_sound.wav";
+    import "$lib/copperplate/font.css";
     
     let world;
 
@@ -273,6 +274,7 @@
         style:left="50vw"
         style:transform="translate(-50%, -50%)"
         style:font-size="93px"
+        style:text-align="center"
         style:color="white">
         Level complete!
     </span>
@@ -309,5 +311,10 @@
 
     input[type=image]:hover {
         transform: scale(1.1);
+    }
+
+    span {
+        font-family: "Copperplate", serif;
+        line-height: 1.2em;
     }
 </style>
