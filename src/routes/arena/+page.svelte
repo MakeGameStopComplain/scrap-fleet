@@ -136,7 +136,7 @@
                     }
                     i++;
                 }
-                if (frame % 100 == 0) {
+                if (frame % 50 == 0) {
                     enemyBullets = [...enemyBullets, ...baddy.component.createBullet()];
                 }
                 if (baddy.x < 0) baddy.x = 0;
@@ -152,7 +152,6 @@
             bull.y -= Math.cos(bull.angle * Math.PI / 180) * bull.speed;
             bull.x += Math.sin(bull.angle * Math.PI / 180) * bull.speed;
 
-            if (frame % 2 == 0) {
                 if (bull.x <= 0 || bull.y <= 0 || bull.x >= arenaWidth || bull.y >= arenaHeight) {
                     enemyBullets.splice(i, 1);
                     i--;
@@ -161,7 +160,6 @@
                     enemyBullets.splice(i, 1);
                     i--;
                 }
-            }
 
             i++;
         }

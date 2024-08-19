@@ -20,7 +20,7 @@
     export let alive = true;
     export let engaged = false;
     export let playerPos = { x: 0, y: 0, angle: 0, };
-    export let health = 2;
+    export let health = 4;
     /**
      * 
      * @param {object} bulletPos
@@ -120,14 +120,14 @@
             rotationalSpeed = 0.01;
             hitboxRadius = 120;
             engagementRing = 1200;
-            health = 5;
+            health = 10;
         }
         else if (type == "fighter") {
             angle = 90;
             speed = 6;
             engagementRing = 414;
             rotationalSpeed = 0.2;
-            health = 3;
+            health = 6;
             hitboxRadius = 75;
         }
     });
