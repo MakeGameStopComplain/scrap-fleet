@@ -74,7 +74,7 @@
             }
             let shipFinal = rows.join("\n");
             localStorage.setItem("shipStr", shipFinal);
-            goto("../builder");
+            goto("../loading");
         }
         else {
             goto("../builder");

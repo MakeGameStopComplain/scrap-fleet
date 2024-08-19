@@ -43,13 +43,13 @@
         <img src={logo} alt="SCRAP FLEET" width={400} />
         <br />
         {#if !saveFileEmpty}
-            <input type="image" on:click={() => { goto("./builder"); }}
+            <input type="image" on:click={() => { goto("./loading"); }}
                 src={continueButton} alt="CONTINUE GAME" style:width="200px" />
         {/if}
         <br /> <br />
         <input type="image" on:click={() => {
                 localStorage.clear();
-                goto("./builder");
+                goto("./loading");
             }}
             src={startButtonImg} alt="NEW GAME" style:width="200px" />
     </div>
