@@ -8,6 +8,7 @@
     import Enemy from "$lib/Enemy.svelte";
     import resignButton from "$lib/gui_assets/concede.png";
     import menuButton from "$lib/gui_assets/main_menu.png";
+    import Collectable from "$lib/Collectable.svelte";
     
     let world;
 
@@ -19,6 +20,7 @@
 
     let playerBullets = [];
     let enemyBullets = [];
+    let collectables = [];
 
     let playerShipComponent;
     
@@ -32,6 +34,7 @@
 
     function exitStage(success=false) {
         if (success) {
+            localStorage.setItem("inventory", JSON.stringify(inventory));
             localStorage.setItem("levelOn", levelOn + 1);
             goto("../builder");
         }
@@ -81,7 +84,14 @@
         for (let baddy of enemies) {
             baddy.component.tick();
             for (let bull of playerBullets) {
-                baddy.component.checkBullet(bull);
+                if (baddy.component.checkBullet(bull)) {
+                    collectables = [...collectables, {
+                        x: baddy.component.xPos,
+                        y: baddy.component.yPos,
+                        type: "B",
+                        angle: 0,
+                    }];
+                }
             }
             if (frame % 100 == 0) {
                 enemyBullets = [...enemyBullets, ...baddy.component.createBullet()];
@@ -120,9 +130,22 @@
         }
         enemies = enemies;
 
-        if (frame > 10 && enemies.length == 0) setTimeout(() => {
+        i = 0;
+        while (i < collectables.length) {
+            let coll = collectables[i];
+            coll.angle += 1;
+            if (Math.pow(coll.x - playerPos.x, 2) + Math.pow(coll.y - playerPos.y, 2) <= 5000) {
+                inventory[coll.type]++;
+                collectables.splice(i, 1);
+                i--;
+            }
+            i++;
+        }
+        collectables = collectables;
+
+        /*if (frame > 10 && enemies.length == 0) setTimeout(() => {
             exitStage(true);
-        }, 2222);
+        }, 2222);*/
 
         requestAnimationFrame(tick);
     }
@@ -131,6 +154,7 @@
     let shipStr = "";
 
     let levelOn;
+    let inventory;
     onMount(() => {
         if (localStorage.getItem("shipStr")) {
             shipStr = localStorage.getItem("shipStr");
@@ -156,6 +180,9 @@
 
         if (localStorage.getItem("levelOn")) {
             levelOn = parseFloat(localStorage.getItem("levelOn"));
+        }
+        if (localStorage.getItem("inventory")) {
+            inventory = JSON.parse(localStorage.getItem("inventory"));
         }
 
         window.addEventListener("keydown", (e) => {
@@ -207,6 +234,9 @@
     {/each}
     {#each enemyBullets as bull}
         <Bullet xPos={bull.x} yPos={bull.y} angle={bull.angle} />
+    {/each}
+    {#each collectables as coll}
+        <Collectable xPos={coll.x} yPos={coll.y} type={coll.type} angle={coll.angle} />
     {/each}
 </div>
 

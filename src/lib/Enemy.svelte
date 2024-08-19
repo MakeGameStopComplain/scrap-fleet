@@ -24,7 +24,11 @@
      */
     export function checkBullet(bulletPos) {
         let distance = Math.sqrt(Math.pow(bulletPos.x - xPos, 2) + Math.pow(bulletPos.y - yPos, 2));
-        if (distance < 75) alive = false;
+        if (distance < 75) {
+            alive = false;
+            return true;
+        }
+        return false;
     }
 
     let speed = 4;
