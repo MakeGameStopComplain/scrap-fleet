@@ -8,6 +8,7 @@
     import thrusterSprite from "$lib/ship_assets/thruster.png";
     import menuMusic from "$lib/audio/menu_and_building_song.wav";
     import startButton from "$lib/gui_assets/start_level.png";
+    import bgImage from "$lib/hangar.png";
 
     let fillMap = {
         ".": "",
@@ -70,6 +71,13 @@
     }
     let selectedTile = "B";
 </script>
+
+<div style:position="fixed"
+    style:top="0" style:left="0"
+    style:width="100vw" style:height="100vh"
+    style:background-image="url('{bgImage}')"
+    style:background-size="cover"
+    style:background-position="center"></div>
 
 <div class="centered" style:text-align="center">
 
@@ -160,12 +168,6 @@
 <style>
     :global(body) {
         margin: 0;
-        background-color: black;
-        background-image: url($lib/hangar.png);
-        background-size: cover;
-        background-position: center;
-        width: 100vw;
-        height: 100vh;
     }
 
     table td {
