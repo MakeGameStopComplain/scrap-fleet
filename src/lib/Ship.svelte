@@ -52,7 +52,6 @@
         let r = Math.floor(body.length / 2 - Math.cos(radialAngle) * radialDistance / cellSize);
         let c = Math.floor(body[0].length / 2 - Math.sin(radialAngle) * radialDistance / cellSize);
 
-        console.log(r, c)
         if (r >= 0 && r < body.length && c >= 0 && c < body[0].length) {
             if (body[r][c] != body[r][c].toLowerCase()) {
                 body[r][c] = body[r][c].toLowerCase();
@@ -140,7 +139,7 @@
                 speed: 24 + velocity,
             });
         }
-        (new Audio(laserSound)).play();
+        if (newBullets.length > 0) (new Audio(laserSound)).play();
         return newBullets;
     }
 

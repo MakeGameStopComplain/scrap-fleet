@@ -30,6 +30,16 @@
         }
     ];
 
+    function exitStage(success=false) {
+        if (success) {
+            localStorage.setItem("levelOn", levelOn + 1);
+            goto("../builder");
+        }
+        else {
+            goto("../builder");
+        }
+    }
+
     let frame = 0;
     function tick() {
         frame++;
@@ -109,6 +119,8 @@
             else i++;
         }
         enemies = enemies;
+
+        if (frame > 10 && enemies.length == 0) exitStage(true);
 
         requestAnimationFrame(tick);
     }
@@ -202,9 +214,7 @@
     style:top="10px"
     style:right="10px"
     style:width="140px"
-    on:click={() => {
-        goto("../builder");
-    }} alt="CONCEDE" />
+    on:click={exitStage} alt="CONCEDE" />
 <input type="image"
     src={menuButton}
     style:position="fixed"
@@ -214,6 +224,14 @@
     on:click={() => {
         goto("../");
     }} alt="MAIN MENU" />
+
+<span style:position="fixed"
+    style:top="20px"
+    style:left="20px"
+    style:color="white">
+    Level {levelOn} <br />    
+    Enemies remaining: {enemies.length}
+</span>
 
 <audio autoplay loop>
     <source src={themeSong} type="audio/wav" />
