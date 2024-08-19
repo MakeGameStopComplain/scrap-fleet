@@ -19,7 +19,7 @@
     let inputs = {};
 
     let playerPos = {
-        x: 600, y: 500, angle: 0,
+        x: 1000, y: 1000, angle: 0,
     };
 
     let playerBullets = [];
@@ -34,23 +34,23 @@
             component: null,
             x: 100, y: 100,
         },
-        /*{
+        {
             type: "scout",
             component: null,
-            x: 1000, y: 1000,
+            x: 1900, y: 1900,
         },
 
         {
             type: "scout",
             component: null,
-            x: 1800, y: 1800,
+            x: 1900, y: 100,
         },
 
         {
-            type: "scout",
+            type: "carrier",
             component: null,
-            x: 1000, y: 100,
-        },*/
+            x: 100, y: 1900,
+        },
     ];
 
     function exitStage(success=false) {
