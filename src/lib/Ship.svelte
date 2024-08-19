@@ -42,11 +42,11 @@
     export let yPos = 200;
     export let angle = 0;
     export function checkBullet(bulletPos) { 
-        let incomingAngle = Math.atan2(bulletPos.y - yPos, bulletPos.x - xPos);
+        let incomingAngle = Math.atan2(yPos - bulletPos.y, bulletPos.x - xPos);
         let incomingDistance = Math.sqrt(Math.pow(bulletPos.y - yPos, 2), Math.pow(bulletPos.x - xPos, 2));
-        let checkAngle = incomingAngle - angle * Math.PI / 180;
-        let checkR = Math.round((Math.sin(checkAngle) * incomingDistance) / cellSize);
-        let checkC = Math.round((Math.cos(checkAngle) * incomingDistance) / cellSize);
+        let checkAngle = incomingAngle + 90 - angle * Math.PI / 180;
+        let checkR = Math.round(body.length / 2 - (Math.sin(checkAngle) * incomingDistance) / cellSize);
+        let checkC = Math.round(body[0].length / 2 - (Math.cos(checkAngle) * incomingDistance) / cellSize);
         if (checkR >= 0 && checkC >= 0 && checkR < body.length && checkC < body[0].length) {
             if (body[checkR][checkC] != ".") {
                 body[checkR][checkC] = ".";
