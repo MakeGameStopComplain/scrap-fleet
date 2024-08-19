@@ -35,13 +35,14 @@
                 alive = false;
                 (new Audio(deathSound)).play();
             }
+            engaged = true;
             return true;
         }
         return false;
     }
 
     let speed = 4;
-    let engagementRing = 600;
+    let engagementRing = 700;
     let rotationalSpeed = 0.05;
     let orbitRadius = 400;
     export function tick() {
@@ -125,7 +126,7 @@
         else if (type == "fighter") {
             angle = 90;
             speed = 6;
-            engagementRing = 414;
+            engagementRing = 600;
             rotationalSpeed = 0.2;
             health = 6;
             hitboxRadius = 75;

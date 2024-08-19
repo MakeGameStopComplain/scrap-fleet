@@ -4,6 +4,8 @@
     import Bullet from "$lib/Bullet.svelte";
     import { goto } from "$app/navigation";
     import backdrop1 from "$lib/backgrounds/background1.png";
+    import backdrop2 from "$lib/backgrounds/background2.png";
+    import backdrop3 from "$lib/backgrounds/background3.png";
     import themeSong from "$lib/audio/spaceship_main_theme.wav";
     import Enemy from "$lib/Enemy.svelte";
     import resignButton from "$lib/gui_assets/concede.png";
@@ -43,14 +45,12 @@
             x: 1900, y: 1900,
             alive: true,
         },
-
         {
             type: "scout",
             component: null,
             x: 1900, y: 100,
             alive: true,
         },
-
         {
             type: "carrier",
             component: null,
@@ -240,6 +240,82 @@
             inventory = JSON.parse(localStorage.getItem("inventory"));
         }
 
+        if (levelOn == 2) {
+            enemies.push(
+                {
+                    type: "fighter",
+                    component: null,
+                    x: 1000, y: 200,
+                    alive: true,
+                },
+                {
+                    type: "scout",
+                    component: null,
+                    x: 1000, y: 1800,
+                    alive: true,
+                },
+                {
+                    type: "scout",
+                    component: null,
+                    x: 1800, y: 1000,
+                    alive: true,
+                },
+                {
+                    type: "fighter",
+                    component: null,
+                    x: 200, y: 1000,
+                    alive: true,
+                },
+            );
+        }
+        else if (levelOn == 3) {
+            enemies.push(
+                {
+                    type: "fighter",
+                    component: null,
+                    x: 1000, y: 200,
+                    alive: true,
+                },
+                {
+                    type: "scout",
+                    component: null,
+                    x: 1000, y: 1800,
+                    alive: true,
+                },
+                {
+                    type: "scout",
+                    component: null,
+                    x: 1800, y: 900,
+                    alive: true,
+                },
+                {
+                    type: "scout",
+                    component: null,
+                    x: 1800, y: 1100,
+                    alive: true,
+                },
+                {
+                    type: "fighter",
+                    component: null,
+                    x: 200, y: 900,
+                    alive: true,
+                },
+                {
+                    type: "fighter",
+                    component: null,
+                    x: 200, y: 1100,
+                    alive: true,
+                },
+                {
+                    type: "carrier",
+                    component: null,
+                    x: 1900, y: 500,
+                    alive: true,
+                },
+            );
+
+        }
+
         window.addEventListener("keydown", (e) => {
             inputs[e.key] = true;
         });
@@ -277,7 +353,8 @@
 
 <div bind:this={world} id="world" style:top="{cameraTop}px" style:left="{cameraLeft}px"
     style:width="{arenaWidth}px" style:height="{arenaHeight}px"
-    style:background-image="url('{backdrop1}')" style:background-size="cover"
+    style:background-image="url('{{ 1: backdrop1, 2: backdrop2, 3: backdrop3 }[levelOn]}')"
+    style:background-size="cover"
     style:background-position="center">
     <Ship bind:xPos={playerPos.x} bind:yPos={playerPos.y} bind:body={playerShipBody} bind:this={playerShipComponent} />
     {#each playerBullets as bull}
