@@ -13,6 +13,8 @@
     import damagedBlockSprite from "$lib/ship_assets/damaged_block.png";
     import damagedCockpitSprite from "$lib/ship_assets/damaged_cockpit.png";
     import damagedReactorSprite from "$lib/ship_assets/damaged_reactor.png";
+    import damagedGunSprite from "$lib/ship_assets/damaged_gun.png";
+    import damagedThrusterSprite from "$lib/ship_assets/damaged_thruster.png";
     import thrusterFire1 from "$lib/ship_assets/thruster_fire_frame1.png";
     import thrusterFire2 from "$lib/ship_assets/thruster_fire_frame2.png";
     import laserSound from "$lib/audio/laser_sound.wav";
@@ -38,9 +40,9 @@
         "T": `url("${thrusterSprite}")`,
         "b": `url("${damagedBlockSprite}")`,
         "c": `url("${damagedCockpitSprite}")`,
-        "g": ``,
+        "g": `url("${damagedGunSprite}")`,
         "r": `url("${damagedReactorSprite}")`,
-        "t": ``,
+        "t": `url("${damagedThrusterSprite}")`,
     };
 
     export let xPos = 200;
@@ -69,7 +71,7 @@
     export function rotate(deg=5) {
         angle += deg;
     }
-    function getThrusterCount() {
+    export function getThrusterCount() {
         let count = 0;
         for (let row of body) {
             for (let cell of row) {

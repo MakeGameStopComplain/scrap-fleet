@@ -281,7 +281,7 @@
     <source src={themeSong} type="audio/wav" />
 </audio>
 
-{#if playerShipComponent && playerShipComponent.thrusting}
+{#if playerShipComponent && playerShipComponent.thrusting && playerShipComponent.getThrusterCount() > 0}
     <audio autoplay loop>
         <source src={thrustSound} type="audio/wav" />
     </audio>
