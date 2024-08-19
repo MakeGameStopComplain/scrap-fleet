@@ -8,6 +8,7 @@
     import Enemy from "$lib/Enemy.svelte";
     import resignButton from "$lib/gui_assets/concede.png";
     import menuButton from "$lib/gui_assets/main_menu.png";
+    import proceedButton from "$lib/gui_assets/proceed.png";
     import Collectable from "$lib/Collectable.svelte";
     import thrustSound from "$lib/audio/fixed_thruster_sound.wav";
     import "$lib/copperplate/font.css";
@@ -262,23 +263,6 @@
     {/each}
 </div>
 
-<input type="image"
-    src={resignButton}
-    style:position="fixed"
-    style:top="10px"
-    style:right="10px"
-    style:width="140px"
-    on:click={exitStage} alt="CONCEDE" />
-<input type="image"
-    src={menuButton}
-    style:position="fixed"
-    style:top="10px"
-    style:right="160px"
-    style:width="140px"
-    on:click={() => {
-        goto("../");
-    }} alt="MAIN MENU" />
-
 <span style:position="fixed"
     style:top="20px"
     style:left="20px"
@@ -288,15 +272,39 @@
 </span>
 
 {#if enemies.length == 0}
-    <span style:position="fixed"
+    <div style:position="fixed"
+        style:text-align="center"
         style:top="50vh"
         style:left="50vw"
-        style:transform="translate(-50%, -50%)"
-        style:font-size="93px"
-        style:text-align="center"
-        style:color="white">
-        Level complete!
-    </span>
+        style:transform="translate(-50%, -50%)">
+        <span 
+            style:font-size="93px"
+            style:color="white">
+            Level complete!
+        </span>
+        <br /> <br />
+        <input type="image"
+            src={proceedButton}
+            style:width="180px"
+            on:click={() => { exitStage(true); }} alt="PROCEED" />
+    </div>
+{:else}
+    <input type="image"
+        src={resignButton}
+        style:position="fixed"
+        style:top="10px"
+        style:right="10px"
+        style:width="140px"
+        on:click={exitStage} alt="CONCEDE" />
+    <input type="image"
+        src={menuButton}
+        style:position="fixed"
+        style:top="10px"
+        style:right="160px"
+        style:width="140px"
+        on:click={() => {
+            goto("../");
+        }} alt="MAIN MENU" />
 {/if}
 
 <audio autoplay loop>
