@@ -182,6 +182,7 @@
         if (localStorage.getItem("levelOn")) {
             levelOn = parseFloat(localStorage.getItem("levelOn"));
         }
+        else levelOn = 1;
         if (localStorage.getItem("inventory")) {
             inventory = JSON.parse(localStorage.getItem("inventory"));
         }

@@ -19,13 +19,14 @@
         "T": `url("${thrusterSprite}")`,
     };
     
-    let shipStr = ".......\n" +
-    "..###..\n" +
-    "...#...\n" +
-    "..###..\n" +
-    "...#...\n" +
-    "..###..\n" +
-    ".......";
+    let shipStr = 
+        ".......\n" +
+        ".......\n" +
+        "...G...\n" +
+        "..BCR..\n" +
+        "...T...\n" +
+        ".......\n" +
+        ".......\n";
     let shipArr = [];
     
     function getShipArr() {
@@ -63,11 +64,11 @@
     });
 
     let inventory = {
-        "B": 5,
+        "B": 0,
         "C": 0,
-        "G": 2,
-        "R": 2,
-        "T": 2,
+        "G": 0,
+        "R": 0,
+        "T": 0,
     }
     let selectedTile = "B";
 </script>

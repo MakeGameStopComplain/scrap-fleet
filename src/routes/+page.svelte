@@ -4,6 +4,9 @@
     import { onMount } from "svelte";
     import startButtonImg from "$lib/gui_assets/start.png";
     import logo from "$lib/gui_assets/scrap_fleet_logo.png";
+    import continueButton from "$lib/gui_assets/continueGame.png";
+
+    let saveFileEmpty = true;
 
     onMount(() => {
         if (!localStorage.getItem("shipStr")) {
@@ -16,6 +19,9 @@
                 ".......\n" +
                 ".......\n"
             );
+        }
+        else {
+            saveFileEmpty = false;
         }
         if (!localStorage.getItem("inventory")) {
             localStorage.setItem("inventory", JSON.stringify({
@@ -36,15 +42,16 @@
     <div class="centered" style:text-align="center">
         <img src={logo} alt="SCRAP FLEET" width={400} />
         <br />
-        <input type="image" on:click={() => { goto("./builder"); }}
-            src={startButtonImg} alt="START" style:width="200px" />
+        {#if !saveFileEmpty}
+            <input type="image" on:click={() => { goto("./builder"); }}
+                src={continueButton} alt="CONTINUE GAME" style:width="200px" />
+        {/if}
         <br /> <br />
-        <button on:click={() => {
-            if (confirm("you sure?")) {
+        <input type="image" on:click={() => {
                 localStorage.clear();
-                location.reload();
-            }
-        }}>Reset game data</button>
+                goto("./builder");
+            }}
+            src={startButtonImg} alt="NEW GAME" style:width="200px" />
     </div>
 </div>
 
