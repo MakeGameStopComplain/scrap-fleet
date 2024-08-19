@@ -30,11 +30,11 @@
     
     let enemies = [
         {
-            type: "scout",
+            type: "carrier",
             component: null,
             x: 100, y: 100,
         },
-        {
+        /*{
             type: "scout",
             component: null,
             x: 1000, y: 1000,
@@ -50,7 +50,7 @@
             type: "scout",
             component: null,
             x: 1000, y: 100,
-        },
+        },*/
     ];
 
     function exitStage(success=false) {

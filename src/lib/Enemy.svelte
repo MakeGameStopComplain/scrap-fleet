@@ -9,6 +9,9 @@
     import scoutSprite from "$lib/enemy_assets/scout.png";
     import laserSound from "$lib/audio/laser_sound.wav";
     import deathSound from "$lib/audio/explosion_sound.wav";
+    import { onMount } from "svelte";
+
+    let hitboxRadius = 75;
 
     export let type = "scout";
     export let xPos = 100;
@@ -25,7 +28,7 @@
      */
     export function checkBullet(bulletPos) {
         let distance = Math.sqrt(Math.pow(bulletPos.x - xPos, 2) + Math.pow(bulletPos.y - yPos, 2));
-        if (distance < 75) {
+        if (distance < hitboxRadius) {
             alive = false;
             (new Audio(deathSound)).play();
             return true;
@@ -37,7 +40,9 @@
     let engagementRing = 600;
     let rotationalSpeed = 0.05;
     export function tick() {
-        if (!engaged) angle += 2;
+        if (!engaged) {
+            if (type == "scout") angle += 2;
+        }
         else {
             let dangle = Math.atan2(playerPos.y - yPos, playerPos.x - xPos) * 180 / Math.PI + 90;
             angle = angle % 360;
@@ -70,7 +75,27 @@
                 speed: 24,
             }];
         }
+        else if (type == "carrier") {
+            let dist = 75;
+            let angle1 = Math.PI * 5 / 4 + angle * Math.PI / 180;
+            return [{
+                x: xPos + Math.cos(angle1) * dist,
+                y: yPos + Math.sin(angle1) * dist,
+                angle: angle,
+                speed: 24,
+            }];
+        }
     }
+
+    onMount(() => {
+        if (type == "carrier") {
+            angle = 90;
+            speed = 0.2;
+            rotationalSpeed = 0.01;
+            hitboxRadius = 120;
+            engagementRing = 1200;
+        }
+    });
 </script>
 
 {#if alive}
@@ -94,8 +119,8 @@
             style:transform="translate(-50%, -50%) rotate({90 + angle}deg)"></div>
     {:else if type == "carrier"}
         <div style:position="absolute"
-            style:width="100px"
-            style:height="100px"
+            style:width="200px"
+            style:height="200px"
             style:background-image="url('{carrierSprite}')"
             style:background-size="100% 100%"
             style:top="{yPos}px"
