@@ -12,6 +12,7 @@
     import Collectable from "$lib/Collectable.svelte";
     import thrustSound from "$lib/audio/fixed_thruster_sound.wav";
     import "$lib/copperplate/font.css";
+    import levelCompleteSign from "$lib/gui_assets/levelComplete.png";
     
     let world;
 
@@ -287,11 +288,7 @@
         style:top="50vh"
         style:left="50vw"
         style:transform="translate(-50%, -50%)">
-        <span 
-            style:font-size="93px"
-            style:color="white">
-            Level complete!
-        </span>
+        <img src={levelCompleteSign} alt="Mission Complete" width={414} />
         <br /> <br />
         <input type="image"
             src={proceedButton}
