@@ -17,7 +17,6 @@
     import levelCompleteSign from "$lib/gui_assets/levelComplete.png";
     import pickupSound from "$lib/audio/pickup_sound.wav";
     import blockHitSound from "$lib/audio/building_sounnd.wav";
-    import { get } from "svelte/store";
     
     let world;
 

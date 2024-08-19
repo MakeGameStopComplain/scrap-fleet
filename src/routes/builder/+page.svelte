@@ -11,6 +11,7 @@
     import bgImage from "$lib/hangar.png";
     import buildSound from "$lib/audio/building_sounnd.wav";
     import deleteSound from "$lib/audio/erase_block.wav";
+    import menuButton from "$lib/gui_assets/main_menu.png";
 
     let fillMap = {
         ".": "",
@@ -165,6 +166,16 @@
         src={startButton} alt="START" style:width="200px" />
 
 </div>
+
+<input type="image"
+    src={menuButton}
+    style:position="fixed"
+    style:top="10px"
+    style:right="10px"
+    style:width="140px"
+    on:click={() => {
+        goto("../");
+    }} alt="MAIN MENU" />
 
 <audio autoplay loop>
     <source src={menuMusic} type="audio/wav" />
