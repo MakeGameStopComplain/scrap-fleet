@@ -9,7 +9,7 @@
     import resignButton from "$lib/gui_assets/concede.png";
     import menuButton from "$lib/gui_assets/main_menu.png";
     import Collectable from "$lib/Collectable.svelte";
-    import thrustSound from "$lib/audio/thruster_sound.wav";
+    import thrustSound from "$lib/audio/fixed_thruster_sound.wav";
     
     let world;
 
@@ -283,7 +283,13 @@
 </audio>
 
 {#if playerShipComponent && playerShipComponent.thrusting && playerShipComponent.getThrusterCount() > 0}
-    <audio autoplay loop>
+    <audio autoplay on:timeupdate={(e) => {
+        let timeBuff = 0.5;
+        if (e.target.currentTime > e.target.duration - timeBuff) {
+            e.target.currentTime = 0;
+            e.target.play();
+        }
+    }}>
         <source src={thrustSound} type="audio/wav" />
     </audio>
 {/if}
