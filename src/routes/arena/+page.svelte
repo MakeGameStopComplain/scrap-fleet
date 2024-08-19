@@ -319,7 +319,7 @@
         style:top="10px"
         style:right="10px"
         style:width="140px"
-        on:click={exitStage} alt="CONCEDE" />
+        on:click={() => { exitStage(false); }} alt="CONCEDE" />
     <input type="image"
         src={menuButton}
         style:position="fixed"
