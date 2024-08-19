@@ -8,6 +8,7 @@
     import fighterSprite from "$lib/enemy_assets/fighter.png";
     import scoutSprite from "$lib/enemy_assets/scout.png";
     import laserSound from "$lib/audio/laser_sound.wav";
+    import deathSound from "$lib/audio/explosion_sound.wav";
 
     export let type = "scout";
     export let xPos = 100;
@@ -26,6 +27,7 @@
         let distance = Math.sqrt(Math.pow(bulletPos.x - xPos, 2) + Math.pow(bulletPos.y - yPos, 2));
         if (distance < 75) {
             alive = false;
+            (new Audio(deathSound)).play();
             return true;
         }
         return false;
