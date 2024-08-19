@@ -117,7 +117,7 @@
         if (playerPos.y > arenaHeight) playerPos.y = arenaHeight;
 
         for (let baddy of enemies) {
-            if (baddy.component && baddy.component.tick) {
+            if (baddy.component && baddy.component.tick && baddy.alive) {
                 baddy.component.tick();
                 i = 0;
                 while (i < playerBullets.length) {
@@ -125,14 +125,14 @@
                     if (baddy.component.checkBullet(bull)) {
                         playerBullets.splice(i, 1);
                         i--;
-                    }
-                    if (baddy.component.health == 0) {
-                        collectables = [...collectables, {
-                            x: baddy.component.xPos,
-                            y: baddy.component.yPos,
-                            type: "B",
-                            angle: 0,
-                        }];
+                        if (baddy.component.health == 0) {
+                            collectables = [...collectables, {
+                                x: baddy.component.xPos,
+                                y: baddy.component.yPos,
+                                type: "B",
+                                angle: 0,
+                            }];
+                        }
                     }
                     i++;
                 }
