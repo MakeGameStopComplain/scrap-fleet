@@ -20,6 +20,7 @@
     export let alive = true;
     export let engaged = false;
     export let playerPos = { x: 0, y: 0, angle: 0, };
+    export let health = 2;
     /**
      * 
      * @param {object} bulletPos
@@ -29,8 +30,11 @@
     export function checkBullet(bulletPos) {
         let distance = Math.sqrt(Math.pow(bulletPos.x - xPos, 2) + Math.pow(bulletPos.y - yPos, 2));
         if (distance < hitboxRadius) {
-            alive = false;
-            (new Audio(deathSound)).play();
+            health--;
+            if (health == 0) {
+                alive = false;
+                (new Audio(deathSound)).play();
+            }
             return true;
         }
         return false;
@@ -94,6 +98,7 @@
             rotationalSpeed = 0.01;
             hitboxRadius = 120;
             engagementRing = 1200;
+            health = 5;
         }
     });
 </script>

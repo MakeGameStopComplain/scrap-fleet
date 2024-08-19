@@ -115,15 +115,22 @@
         for (let baddy of enemies) {
             if (baddy.component && baddy.component.tick) {
                 baddy.component.tick();
-                for (let bull of playerBullets) {
+                i = 0;
+                while (i < playerBullets.length) {
+                    let bull = playerBullets[i];
                     if (baddy.component.checkBullet(bull)) {
+                        playerBullets.splice(i, 1);
+                    }
+                    if (baddy.component.health == 0) {
                         collectables = [...collectables, {
                             x: baddy.component.xPos,
                             y: baddy.component.yPos,
                             type: "B",
                             angle: 0,
                         }];
+                        i--;
                     }
+                    i++;
                 }
                 if (frame % 100 == 0) {
                     enemyBullets = [...enemyBullets, ...baddy.component.createBullet()];
