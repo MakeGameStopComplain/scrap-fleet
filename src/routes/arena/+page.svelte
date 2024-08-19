@@ -17,6 +17,7 @@
     import levelCompleteSign from "$lib/gui_assets/levelComplete.png";
     import pickupSound from "$lib/audio/pickup_sound.wav";
     import blockHitSound from "$lib/audio/building_sounnd.wav";
+    import { get } from "svelte/store";
     
     let world;
 
@@ -80,6 +81,16 @@
         }
     }
 
+    function getRandomItemType() {
+        let rng = Math.random();
+        let itemType = "B";
+        if (rng < 0.6) itemType = "B";
+        else if (rng < 0.7) itemType = "G";
+        else if (rng < 0.75) itemType = "T";
+        else if (rng <= 1) itemType = "R";
+        return itemType;
+    }
+
     let frame = 0;
     function tick() {
         frame++;
@@ -129,9 +140,14 @@
                         i--;
                         if (baddy.component.health == 0) {
                             collectables = [...collectables, {
-                                x: baddy.component.xPos,
+                                x: baddy.component.xPos - 15,
                                 y: baddy.component.yPos,
-                                type: "B",
+                                type: getRandomItemType(),
+                                angle: 0,
+                            }, {
+                                x: baddy.component.xPos + 15,
+                                y: baddy.component.yPos,
+                                type: getRandomItemType(),
                                 angle: 0,
                             }];
                         }
