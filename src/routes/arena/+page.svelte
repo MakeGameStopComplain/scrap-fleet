@@ -31,7 +31,24 @@
             type: "scout",
             component: null,
             x: 100, y: 100,
-        }
+        },
+        {
+            type: "scout",
+            component: null,
+            x: 1000, y: 1000,
+        },
+
+        {
+            type: "scout",
+            component: null,
+            x: 1800, y: 1800,
+        },
+
+        {
+            type: "scout",
+            component: null,
+            x: 1000, y: 100,
+        },
     ];
 
     function exitStage(success=false) {
@@ -84,24 +101,26 @@
         if (playerPos.y > arenaHeight) playerPos.y = arenaHeight;
 
         for (let baddy of enemies) {
-            baddy.component.tick();
-            for (let bull of playerBullets) {
-                if (baddy.component.checkBullet(bull)) {
-                    collectables = [...collectables, {
-                        x: baddy.component.xPos,
-                        y: baddy.component.yPos,
-                        type: "B",
-                        angle: 0,
-                    }];
+            if (baddy.component && baddy.component.tick) {
+                baddy.component.tick();
+                for (let bull of playerBullets) {
+                    if (baddy.component.checkBullet(bull)) {
+                        collectables = [...collectables, {
+                            x: baddy.component.xPos,
+                            y: baddy.component.yPos,
+                            type: "B",
+                            angle: 0,
+                        }];
+                    }
                 }
+                if (frame % 100 == 0) {
+                    enemyBullets = [...enemyBullets, ...baddy.component.createBullet()];
+                }
+                if (baddy.x < 0) baddy.x = 0;
+                if (baddy.y < 0) baddy.y = 0;
+                if (baddy.x > arenaWidth) baddy.x = arenaWidth;
+                if (baddy.y > arenaHeight) baddy.y = arenaHeight;
             }
-            if (frame % 100 == 0) {
-                enemyBullets = [...enemyBullets, ...baddy.component.createBullet()];
-            }
-            if (baddy.x < 0) baddy.x = 0;
-            if (baddy.y < 0) baddy.y = 0;
-            if (baddy.x > arenaWidth) baddy.x = arenaWidth;
-            if (baddy.y > arenaHeight) baddy.y = arenaHeight;
         }
 
         i = 0;
