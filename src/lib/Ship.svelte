@@ -66,7 +66,8 @@
         }
         return false;
     };
-    export let velocity = 0;
+    export let velocityX = 0;
+    export let velocityY = 0;
     export let thrusting = 0;
     export function rotate(deg=5) {
         angle += deg;
@@ -94,19 +95,23 @@
     export function tick() {
         let thrusterCount = getThrusterCount();
         if (thrusting == 1) {
-            velocity += 0.5 * thrusterCount;
+            velocityX += 0.5 * thrusterCount * Math.sin(angle * Math.PI / 180);
+            velocityY += 0.5 * thrusterCount * Math.cos(angle * Math.PI / 180);
         }
         else if (thrusting == -1) {
-            velocity -= 0.5 * thrusterCount;
+            velocityX += 0.5 * thrusterCount * Math.sin(angle * Math.PI / 180);
+            velocityY += 0.5 * thrusterCount * Math.cos(angle * Math.PI / 180);
         }
         else if (thrusting == 0) {
-            velocity /= 1.01;
+            velocityX /= 1.01;
+            velocityY /= 1.01;
         }
 
-        velocity = Math.max(Math.min(velocity, 7 * thrusterCount), -7 * thrusterCount);
+        velocityX = Math.max(Math.min(velocityX, 5 * thrusterCount), -5 * thrusterCount);
+        velocityY = Math.max(Math.min(velocityY, 5 * thrusterCount), -5 * thrusterCount);
 
-        yPos -= Math.cos(angle * Math.PI / 180) * velocity;
-        xPos += Math.sin(angle * Math.PI / 180) * velocity;
+        yPos -= velocityY;
+        xPos += velocityX;
 
         if (fireFrame == 1) fireFrame = 2;
         else fireFrame = 1;
@@ -138,7 +143,7 @@
                 x: pos.x,
                 y: pos.y,
                 angle: angle,
-                speed: 24 + velocity,
+                speed: 24 + Math.sqrt(Math.pow(velocityX, 2) + Math.pow(velocityY, 2)),
             });
         }
         if (newBullets.length > 0) (new Audio(laserSound)).play();

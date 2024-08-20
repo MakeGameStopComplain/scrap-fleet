@@ -101,8 +101,8 @@
         else if (inputs["ArrowDown"]) playerShipComponent.thrusting = -1;
         else playerShipComponent.thrusting = 0;
 
-        if (inputs["ArrowRight"]) playerShipComponent.rotate(5);
-        else if (inputs["ArrowLeft"]) playerShipComponent.rotate(-5);
+        if (inputs["ArrowRight"]) playerShipComponent.rotate(4);
+        else if (inputs["ArrowLeft"]) playerShipComponent.rotate(-4);
         playerShipComponent.tick();
 
         setCamera(playerPos.x, playerPos.y);
