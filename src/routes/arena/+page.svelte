@@ -60,7 +60,10 @@
     ];
 
     function exitStage(success=false) {
-        if (success) {
+        if (success && levelOn == 3) {
+            goto("../ending");
+        }
+        else if (success) {
             localStorage.setItem("inventory", JSON.stringify(inventory));
             localStorage.setItem("levelOn", levelOn + 1);
             let rows = [];
