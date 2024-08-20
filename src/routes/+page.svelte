@@ -5,6 +5,9 @@
     import startButtonImg from "$lib/gui_assets/start.png";
     import logo from "$lib/gui_assets/scrap_fleet_logo.png";
     import continueButton from "$lib/gui_assets/continueGame.png";
+    import controlsImage from "$lib/controls.png";
+    import menuButton from "$lib/gui_assets/main_menu.png";
+    import controlsButton from "$lib/gui_assets/controls.png";
 
     let saveFileEmpty = true;
 
@@ -36,6 +39,8 @@
             localStorage.setItem("levelOn", 1);
         }
     });
+
+    let showControls = false;
 </script>
 
 <div id="mainScreen">
@@ -44,16 +49,39 @@
         <br />
         {#if !saveFileEmpty}
             <input type="image" on:click={() => { goto("./loading"); }}
-                src={continueButton} alt="CONTINUE GAME" style:width="200px" />
+                src={continueButton} alt="CONTINUE GAME" style:width="160px" />
         {/if}
         <br /> <br />
         <input type="image" on:click={() => {
                 localStorage.clear();
                 goto("./loading");
             }}
-            src={startButtonImg} alt="NEW GAME" style:width="200px" />
+            src={startButtonImg} alt="NEW GAME" style:width="160px" />
+        <br /> <br />
+        <input type="image" on:click={() => {
+                showControls = true;
+            }}
+            src={controlsButton} alt="CONTROLS" style:width="160px" />
     </div>
 </div>
+
+{#if showControls}
+    <div style:position="fixed"
+        style:top="0"
+        style:left="0"
+        style:width="100vw"
+        style:height="100vh"
+        style:background-color="#202020">
+        <div class="centered" style:text-align="center">
+            <img src={controlsImage} alt="wasd to move, k to shoot" height={414} />
+            <br /> <br />
+            <input type="image" on:click={() => {
+                    showControls = false;
+                }}
+                src={menuButton} alt="MAIN MENU" style:width="160px" />
+        </div>
+    </div>
+{/if}
 
 <audio autoplay loop>
     <source src={menuMusic} type="audio/wav" />
