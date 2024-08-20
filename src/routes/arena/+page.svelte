@@ -97,20 +97,21 @@
     function tick() {
         frame++;
 
-        if (inputs["ArrowUp"]) playerShipComponent.thrusting = 1;
-        else if (inputs["ArrowDown"]) playerShipComponent.thrusting = -1;
+        if (inputs["ArrowUp"] || inputs["w"]) playerShipComponent.thrusting = 1;
+        else if (inputs["ArrowDown"] || inputs["s"]) playerShipComponent.thrusting = -1;
         else playerShipComponent.thrusting = 0;
 
-        if (inputs["ArrowRight"]) playerShipComponent.rotate(4);
-        else if (inputs["ArrowLeft"]) playerShipComponent.rotate(-4);
+        if (inputs["ArrowRight"] || inputs["d"]) playerShipComponent.rotate(4);
+        else if (inputs["ArrowLeft"] || inputs["a"]) playerShipComponent.rotate(-4);
         playerShipComponent.tick();
 
         setCamera(playerPos.x, playerPos.y);
 
-        if (inputs["x"]) {
+        if (inputs["x"] || inputs["k"]) {
             let newBullets = playerShipComponent.createBullet();
             playerBullets = [...playerBullets, ...newBullets];
             inputs["x"] = false;
+            inputs["k"] = false;
         }
 
         let i = 0;
