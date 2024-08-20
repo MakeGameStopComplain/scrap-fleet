@@ -10,6 +10,7 @@
     import controlsButton from "$lib/gui_assets/controls.png";
 
     let saveFileEmpty = true;
+    let audioPlayer;
 
     onMount(() => {
         if (!localStorage.getItem("shipStr")) {
@@ -28,7 +29,7 @@
         }
         if (!localStorage.getItem("inventory")) {
             localStorage.setItem("inventory", JSON.stringify({
-                "B": 0,
+                "B": 4,
                 "C": 0,
                 "G": 0,
                 "R": 0,
@@ -38,6 +39,8 @@
         if (!localStorage.getItem("levelOn")) {
             localStorage.setItem("levelOn", 1);
         }
+
+        audioPlayer.play();
     });
 
     let showControls = false;
@@ -83,7 +86,7 @@
     </div>
 {/if}
 
-<audio autoplay loop>
+<audio autoplay loop bind:this={audioPlayer}>
     <source src={menuMusic} type="audio/wav" />
 </audio>
 

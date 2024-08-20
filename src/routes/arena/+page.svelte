@@ -142,12 +142,7 @@
                         i--;
                         if (baddy.component.health == 0) {
                             collectables = [...collectables, {
-                                x: baddy.component.xPos - 15,
-                                y: baddy.component.yPos,
-                                type: getRandomItemType(),
-                                angle: 0,
-                            }, {
-                                x: baddy.component.xPos + 15,
+                                x: baddy.component.xPos,
                                 y: baddy.component.yPos,
                                 type: getRandomItemType(),
                                 angle: 0,
